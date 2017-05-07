@@ -1,5 +1,7 @@
 # textlint [![Build Status](https://travis-ci.org/textlint/textlint.github.io.svg?branch=master)](https://travis-ci.org/textlint/textlint.github.io)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/textlint/textlint.github.io.svg)](https://greenkeeper.io/)
+
 ONLINE DEMO SITE.
 
 Visit [https://textlint.github.io/](https://textlint.github.io/)
