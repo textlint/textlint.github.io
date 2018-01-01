@@ -15,6 +15,50 @@ function mutateAfterMount(path, props) {
         if (typeof props.defaultValue === "string") {
             cm.setValue(props.defaultValue);
         }
+        // for Mobile
+        var userAgent = window.navigator.userAgent.toLowerCase()
+        if (userAgent.indexOf('iphone') != -1 || userAgent.indexOf('ipad') != -1 || userAgent.indexOf('android') != -1) {
+            const origOnKeyPress = cm.display.input.onKeyPress
+            cm.display.input.onKeyPress = function(e) {
+                if(e.which >= 0x10000) {
+                    return
+                }
+
+                if(!cm.display.input.composing) {
+                    cm.keyPressTimer = setTimeout( () => {
+                        origOnKeyPress.call(this, e)
+                    }, 30)
+                }
+            }
+
+            const inputArea = cm.display.input.div || cm.display.input.textarea
+                inputArea.addEventListener('compositionstart', (_cm, e) => {
+                if(cm.keyPressTimer) {
+                    clearTimeout(cm.keyPressTimer)
+                }
+            }, false)
+
+            const inputField = cm.display.input.getField()
+            window.addEventListener('keydown', function(e){
+                if(e.target == inputField && cm.display.input.composing) {
+                    e.stopPropagation()
+                }
+            }, true)
+
+            inputField.addEventListener('blur', function(e){
+                if(e.relatedTarget) {
+                    return
+                }
+                e.stopPropagation()
+
+                if (cm.display.input.composing) {
+                    inputField.focus()
+                    setTimeout(function(){
+                        inputField.blur()
+                    }, 1)
+                }
+            }, false)
+        }
     };
 }
 function updateCmState(cm, nextProps) {
