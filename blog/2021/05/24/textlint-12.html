@@ -1,0 +1,232 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>textlint v12.0.0 · textlint</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="We just publish textlint v12.0.0, which is a major release upgrade of textlint."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="textlint v12.0.0 · textlint"/><meta property="og:type" content="website"/><meta property="og:url" content="https://textlint.github.io/blog/2021/05/24/textlint-12.html"/><meta property="og:description" content="We just publish textlint v12.0.0, which is a major release upgrade of textlint."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/textlint-icon_256x256.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://textlint.github.io/blog/atom.xml" title="textlint Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://textlint.github.io/blog/feed.xml" title="textlint Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/textlint-icon_256x256.png" alt="textlint"/><h2 class="headerTitleWithLogo">textlint</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/getting-started.html" target="_self">Docs</a></li><li class=""><a href="https://github.com/textlint/textlint/wiki/Collection-of-textlint-rule" target="_self">Rules</a></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Blog</a></li><li class=""><a href="/help.html" target="_self">Help</a></li><li class=""><a href="https://github.com/textlint/textlint" target="_self">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/blog/2021/05/24/textlint-12.html">textlint v12.0.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/07/22/textlint-11.html">textlint 11 released</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/05/22/new-website.html">New website</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/01/13/renewing-1.0.0.html">Renewing</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2021/05/24/textlint-12.html">textlint v12.0.0</a></h1><p class="post-meta">May 24, 2021</p><div class="authorBlock"><p class="post-authorName"><a href="http://github.com/azu" target="_blank" rel="noreferrer noopener">azu</a></p></div></header><div><span><p>We just publish textlint v12.0.0, which is a major release upgrade of textlint.</p>
+<p>This release adds some new features and fixes several bugs found in the previous release.
+This release also has some breaking changes.</p>
+<h2><a class="anchor" aria-hidden="true" id="summary"></a><a href="#summary" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Summary</h2>
+<p><strong>For textlint user</strong></p>
+<p>textlint improves markdown parsing, so it may found newer errors.</p>
+<p>You can upgrade textlint via following commands:</p>
+<pre><code class="hljs">npm install textlint@12
+# or
+yarn install textlint@12
+</code></pre>
+<p>textlint 12.0.0 requires Node.js 12+.
+If you are using Node.js 10.x, please upgrade your Node.js env.</p>
+<ul>
+<li><a href="https://nodejs.org/en/download/">Download | Node.js</a></li>
+</ul>
+<p><strong>For textlint rule creator</strong></p>
+<p><code>textlint-tester</code> and <code>textlint-scripts</code> are updated.</p>
+<pre><code class="hljs">npm <span class="hljs-keyword">install </span>textlint-<span class="hljs-keyword">scripts@12 </span>--save-dev
+<span class="hljs-comment"># or</span>
+yarn <span class="hljs-keyword">install </span>textlint-<span class="hljs-keyword">scripts@12 </span>--dev
+</code></pre>
+<p><code>textlint-tester@12</code> use <code>export default</code> instead of <code>modules.exports =</code>.
+So, you need to use <code>import TextLintTester from &quot;textlint-tester&quot;</code> instead of <code>const TextLintTester = require(&quot;textlint-tester&quot;)</code>.</p>
+<pre><code class="hljs css language-diff"><span class="hljs-deletion">- const TextLintTester = require("textlint-tester");</span>
+<span class="hljs-addition">+ import TextLintTester from "textlint-tester";</span>
+</code></pre>
+<p>Migration script using <a href="https://semgrep.dev/docs/getting-started/#run-semgrep-locally">Semgrep</a>.</p>
+<pre><code class="hljs"><span class="hljs-meta"># Install semgrep</span>
+<span class="hljs-meta"># For macOS</span>
+$ brew install semgrep
+
+<span class="hljs-meta"># For Ubuntu / Windows via WSL / Linux / macOS</span>
+$ python3 -m pip install semgrep
+
+<span class="hljs-meta"># ---- After installation ----</span>
+
+<span class="hljs-meta"># Run migration script</span>
+semgrep --config s/azu:textlint<span class="hljs-number">-12</span>-migration
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="breaking-changes"></a><a href="#breaking-changes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Breaking Changes</h2>
+<ul>
+<li>All <code>@textlint/*</code> internal modules use same version
+<ul>
+<li>All modules are released as <code>12.0.0</code>.</li>
+</ul></li>
+<li>Drop Node.js 10.x support <a href="https://github.com/textlint/textlint/issues/600">#600</a>
+<ul>
+<li>update <code>engines</code> filels to <code>&quot;node&quot;: &quot;^12.20.0 || ^14.13.1 || &gt;=16.0.0&quot;</code></li>
+</ul></li>
+<li>Modules require ES2015 supported environments <a href="https://github.com/textlint/textlint/issues/777">#777</a> <a href="https://github.com/textlint/textlint/issues/774">#774</a>
+<ul>
+<li>Now, all module target is ES2015</li>
+<li>It means that textlint does not support IE</li>
+<li>📝 Node.js 12+ support ES2018+</li>
+</ul></li>
+<li>Built-in markdown parser is updated
+<ul>
+<li><code>@textlint/markdown-to-ast@12</code> use <a href="https://github.com/remarkjs/remark/releases/tag/13.0.0">remark@13.0.0</a></li>
+</ul></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="package-versions"></a><a href="#package-versions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Package Versions</h2>
+<table>
+<thead>
+<tr><th>Breaking Changes</th><th>Package</th><th>Previous version</th><th>Current version</th></tr>
+</thead>
+<tbody>
+<tr><td>✔</td><td>textlint</td><td>11.9.1</td><td>12.0.0</td></tr>
+<tr><td>✔</td><td>textlint-tester</td><td>5.3.5</td><td>12.0.0</td></tr>
+<tr><td>✔</td><td>textlint-scripts</td><td>3.0.0</td><td>12.0.0</td></tr>
+<tr><td></td><td>@textlint/ast-node-types</td><td>4.4.3</td><td>12.0.0</td></tr>
+<tr><td></td><td>@textlint/ast-traverse</td><td>2.3.5</td><td>12.0.0</td></tr>
+<tr><td></td><td>@textlint/ast-tester</td><td>2.3.5</td><td>12.0.0</td></tr>
+<tr><td></td><td>@textlint/feature-flag</td><td>3.3.5</td><td>12.0.0</td></tr>
+<tr><td></td><td>@textlint/fixer-formatter</td><td>3.3.5</td><td>12.0.0</td></tr>
+<tr><td></td><td>@textlint/kernel</td><td>3.4.5</td><td>12.0.0</td></tr>
+<tr><td></td><td>@textlint/linter-formatter</td><td>3.3.5</td><td>12.0.0</td></tr>
+<tr><td></td><td>@textlint/module-interop</td><td>1.2.5</td><td>12.0.0</td></tr>
+<tr><td>✔</td><td>@textlint/textlint-plugin-markdown</td><td>5.3.5</td><td>12.0.0</td></tr>
+<tr><td></td><td>@textlint/textlint-plugin-text</td><td>4.3.5</td><td>12.0.0</td></tr>
+<tr><td>✔</td><td>@textlint/types</td><td>1.5.5</td><td>12.0.0</td></tr>
+<tr><td></td><td>@textlint/utils</td><td>1.2.5</td><td>12.0.0</td></tr>
+</tbody>
+</table>
+<p>Now, This monorepo includes <code>textlint-scripts</code> package in <a href="https://github.com/textlint/textlint/issues/779">#779</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="textlintmarkdown-to-ast"></a><a href="#textlintmarkdown-to-ast" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>@textlint/markdown-to-ast</code></h2>
+<p>It is a markdown parser in textlint.
+We have updated to <a href="https://github.com/remarkjs/remark/releases/tag/13.0.0">remark@13.0.0</a>, and it has many changes related to Markdown AST</p>
+<p>You can see the changes at <a href="https://github.com/textlint/textlint/pull/767">feat(markdown-to-ast): update to remark-parse@9 #767</a></p>
+<p>This package updates also includes security fixes.
+CVE-2020-7753 has been fixed in textlint 12.0.0.</p>
+<ul>
+<li><a href="https://github.com/advisories/GHSA-w5p7-h5w8-2hfq">Regular Expression Denial of Service in trim · CVE-2020-7753 · GitHub Advisory Database</a></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="features"></a><a href="#features" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Features</h3>
+<h4><a class="anchor" aria-hidden="true" id="add-footnotereference-node"></a><a href="#add-footnotereference-node" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Add <code>FootnoteReference</code> node</h4>
+<pre><code class="hljs css language-markdown">The NATO phonetic alphabet[^wiki].
+
+[<span class="hljs-symbol">^wiki</span>]: <span class="hljs-link">Read more about it on wikipedia: &lt;http://en.wikipedia.org/wiki/NATO_phonetic_alphabet&gt;.</span>
+</code></pre>
+<p>Previously, It is called <code>LinkReference</code>, textlint@12 treat it as <code>FootnoteReference</code>.
+Some rules may report new errors on <code>FootnoteReference</code>.</p>
+<h3><a class="anchor" aria-hidden="true" id="known-bugs"></a><a href="#known-bugs" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Known bugs</h3>
+<ul>
+<li>gfm parsing bug that generate broken AST: <a href="https://github.com/remarkjs/remark-gfm/issues/16">remarkjs/remark-gfm#16</a>
+<ul>
+<li>→ textlint use workaround:  <a href="https://github.com/remarkjs/remark-gfm/issues/16#issuecomment-846357030">remarkjs/remark-gfm#16 (comment)</a> at <a href="https://github.com/textlint/textlint/commit/c99218ea37518e8a42bb5d283276ccf696618748"><code>c99218e</code></a></li>
+<li>→ markdown-to-ast does not generate broken AST.</li>
+</ul></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="textlint-tester"></a><a href="#textlint-tester" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>textlint-tester</code></h2>
+<ul>
+<li>use <code>export default</code> instead of <code>export =</code> <a href="https://github.com/textlint/textlint/issues/775">#775</a> <a href="https://github.com/textlint/textlint/issues/689">#689</a></li>
+</ul>
+<p>The <code>textlint-tester</code> user should use <code>import</code> instead of <code>require</code>.</p>
+<pre><code class="hljs css language-diff"><span class="hljs-deletion">- const TextLintTester = require("textlint-tester");</span>
+<span class="hljs-addition">+ import TextLintTester from "textlint-tester";</span>
+</code></pre>
+<p>Or, pick <code>default</code> property.</p>
+<pre><code class="hljs css language-diff"><span class="hljs-deletion">- const TextLintTester = require("textlint-tester");</span>
+<span class="hljs-addition">+ const TextLintTester = require("textlint-tester").default;</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="textlint-scripts"></a><a href="#textlint-scripts" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>textlint-scripts</code></h2>
+<ul>
+<li>Update to mocha@8</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="textlinttypes"></a><a href="#textlinttypes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>@textlint/types</code></h2>
+<ul>
+<li>Fix <code>getSource</code> argument type <a href="https://github.com/textlint/textlint/issues/770">#770</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="textlintast-tester"></a><a href="#textlintast-tester" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>@textlint/ast-tester</code></h2>
+<ul>
+<li>Improve error message <a href="https://github.com/textlint/textlint/issues/783">#783</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="community-news-"></a><a href="#community-news-" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Community News 🆕</h2>
+<ul>
+<li><a href="https://github.com/textlint/textlint-plugin-latex2e">textlint-plugin-latex2e</a> reach to v1.0.0 🎉
+<ul>
+<li>textlint can lint LaTeX files with this plugin</li>
+</ul></li>
+<li><a href="https://github.com/textlint/editor">@textlint/editor</a> beta released 🎉
+<ul>
+<li>textlint works on your browser as browser extension</li>
+<li><a href="https://addons.mozilla.org/firefox/addon/textlint-editor/">textlint editor - Firefox</a></li>
+<li><a href="https://chrome.google.com/webstore/detail/textlint-editor/gfhlfpnpjokocfohicmfbgjneiipfeil">textlint editor - Chrome</a></li>
+<li>It's <a href="https://github.com/textlint/editor#purpose">purpose</a> is privacy first linting tools!</li>
+</ul></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="thanks-to-support"></a><a href="#thanks-to-support" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Thanks to Support!</h2>
+<p><a href="https://github.com/Velc">VELC</a> supports <a href="https://github.com/azu/">@azu</a> as GitHub Sponsors!</p>
+<ul>
+<li><a href="https://tamukai.blog.velc.jp/entry/2021/05/18/091040">会社（ヴェルク）としてGithub Sponsorsになりました - ヴェルク - IT起業の記録</a> (Japanese blog)</li>
+</ul>
+<p>Many people support me, Thanks again!</p>
+<p>If you're interested in GitHub Sponsor, please check <a href="https://github.com/sponsors/azu">@azu on GitHub Sponsors</a>!</p>
+<iframe src="https://github.com/sponsors/azu/card" title="Sponsor azu" height="225" width="600" style="border: 0;"></iframe>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog/">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#summary">Summary</a></li><li><a href="#breaking-changes">Breaking Changes</a></li><li><a href="#package-versions">Package Versions</a></li><li><a href="#textlintmarkdown-to-ast"><code>@textlint/markdown-to-ast</code></a><ul class="toc-headings"><li><a href="#features">Features</a></li><li><a href="#known-bugs">Known bugs</a></li></ul></li><li><a href="#textlint-tester"><code>textlint-tester</code></a></li><li><a href="#textlint-scripts"><code>textlint-scripts</code></a></li><li><a href="#textlinttypes"><code>@textlint/types</code></a></li><li><a href="#textlintast-tester"><code>@textlint/ast-tester</code></a></li><li><a href="#community-news-">Community News 🆕</a></li><li><a href="#thanks-to-support">Thanks to Support!</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/textlint-icon_256x256.png" alt="textlint" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/en/configuring.html">User Manual</a><a href="/docs/en/rule.html">Developer Guide</a></div><div><h5>Community</h5><a href="https://gitter.im/textlint-ja/textlint-ja">Project Chat</a></div><div><h5>More</h5><a href="/blog">Blog</a><a href="https://github.com/">GitHub</a><a class="github-button" href="https://github.com/textlint/textlint" data-icon="octicon-star" data-count-href="/textlint/textlint/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2021 textlint organization</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '27ef1d5fc0d12142485f3784f7d3cb46',
+                indexName: 'textlint',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {}
+              });
+            </script></body></html>
