@@ -149,7 +149,7 @@
 </ul>
 <p>We are migrating entire codes to TypeScript.</p>
 <h5><a class="anchor" aria-hidden="true" id="linting-and-style"></a><a href="#linting-and-style" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Linting and Style</h5>
-<p>This repository uses <a href="https://eslint.org/">ESLint</a> for JavaScript linter and <a href="https://prettier.io/">Prettier</a> for code formatter. We use <a href="https://www.npmjs.com/package/lint-staged"><code>lint-staged</code></a> and <a href="https://www.npmjs.com/package/husky"><code>husky</code></a> to make coding style consistent before commit, but if you have your own <a href="https://git-scm.com/book/gr/v2/Customizing-Git-Git-Hooks">Git hooks</a> locally, these setup doesn't work. In such case, please run ESLint and Prettier manually as below after making changes.</p>
+<p>This repository uses <a href="https://eslint.org/">ESLint</a> for JavaScript linter and <a href="https://prettier.io/">Prettier</a> for code formatter. We use <a href="https://www.npmjs.com/package/lint-staged"><code>lint-staged</code></a> and <a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">Git Hooks</a> to make coding style consistent before commit, but if you have your own Git hooks locally, these setup doesn't work. In such case, please run ESLint and Prettier manually as below after making changes.</p>
 <ul>
 <li><p>Run ESLint:</p>
 <pre><code class="hljs css language-sh">$ yarn eslint
@@ -158,7 +158,7 @@
 <pre><code class="hljs css language-sh">$ yarn eslint:fix
 </code></pre></li>
 <li><p>Run Prettier to reformat code:</p>
-<pre><code class="hljs css language-sh">$ yarn prettier
+<pre><code class="hljs css language-sh">$ yarn format
 </code></pre></li>
 </ul>
 <h5><a class="anchor" aria-hidden="true" id="commit-message-format"></a><a href="#commit-message-format" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Commit Message Format</h5>
