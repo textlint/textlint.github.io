@@ -115,7 +115,8 @@ you should implement <code>availableExtensions()</code> method as instance metho
 <p><code>processor()</code> method should return an object that have <code>preProcess</code> and <code>postProcess</code> method.</p>
 <h4><a class="anchor" aria-hidden="true" id="preprocesstext-filepath-txtparentnode---text-string-ast-txtparentnode-"></a><a href="#preprocesstext-filepath-txtparentnode---text-string-ast-txtparentnode-" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>preProcess(text, filePath): TxtParentNode | { text: string; ast: TxtParentNode; }</code></h4>
 <p><code>preProcess</code> method should return <code>TxtParentNode</code> object or <code>{ text: string, ast: TxtParentNode }</code> object.
-<code>TxtParentNode</code> object is an Abstract Syntax Tree (AST) of the text.</p>
+Also, <code>preProcess</code> method can return <code>Promise&lt;TxtParentNode&gt; | Promise&lt;{ text: string, ast: TxtParentNode }&gt;</code>.</p>
+<p><code>TxtParentNode</code> object is an Abstract Syntax Tree (AST) of the text.</p>
 <p>You should check the AST using <a href="https://github.com/textlint/textlint/tree/master/packages/@textlint/ast-tester" title="@textlint/ast-tester">@textlint/ast-tester</a>.</p>
 <ul>
 <li><a href="https://github.com/textlint/textlint/tree/master/packages/@textlint/ast-tester">textlint/@textlint/ast-tester: Compliance tests for textlint's AST</a></li>
@@ -189,7 +190,8 @@ isTxtAST(AST); <span class="hljs-comment">// true or false</span>
 <p>For more details, see <a href="https://github.com/textlint/textlint/issues/649">https://github.com/textlint/textlint/issues/649</a></p>
 <h4><a class="anchor" aria-hidden="true" id="postprocessmessages-filepath"></a><a href="#postprocessmessages-filepath" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>postProcess(messages, filePath)</code></h4>
 <p><code>postProcess</code> method should return <code>{ messages, filePath }</code>.
-<code>filePath</code> argument may be undefined when text was input from stdin.</p>
+Also, <code>postProcess</code> method can return <code>Promise&lt;{ messages, filePath }&gt;</code>.</p>
+<p><code>filePath</code> argument may be undefined when text was input from stdin.</p>
 <h2><a class="anchor" aria-hidden="true" id="plugin-configuration"></a><a href="#plugin-configuration" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Plugin configuration</h2>
 <p>You can use Processor plugin in the same way a plugin.</p>
 <pre><code class="hljs">{
