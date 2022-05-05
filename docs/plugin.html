@@ -75,9 +75,9 @@ For example, <code>@textlint/textlint-plugin-markdown</code> is a textlint plugi
 <span class="hljs-keyword">import</span> { parse } <span class="hljs-keyword">from</span> <span class="hljs-string">"txt-to-ast"</span>;
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TextProcessor</span> </span>{
     <span class="hljs-keyword">constructor</span>(options = {}) {
-       <span class="hljs-keyword">this</span>.options = options;
+        <span class="hljs-keyword">this</span>.options = options;
         <span class="hljs-comment">// support "extension" option</span>
-       <span class="hljs-keyword">this</span>.extensions = options.extensions ? options.extensions : [];
+        <span class="hljs-keyword">this</span>.extensions = options.extensions ? options.extensions : [];
     }
     <span class="hljs-comment">// available ".ext" list</span>
     <span class="hljs-comment">// user can add own custom extension as "extensions" option</span>
