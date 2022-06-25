@@ -61,7 +61,7 @@
 <li>If you want to know AST of a text, use <a href="/docs/txtnode.html#online-parsing-demo">Online Parsing Demo</a></li>
 </ul></li>
 </ul>
-<p>Each rules are represented by an object with some properties.
+<p>Each rule are represented by an object with some properties.
 The properties are equivalent to AST node types from TxtNode.</p>
 <p>The basic source code format for a rule is:</p>
 <pre><code class="hljs css language-js"><span class="hljs-comment">/**
@@ -87,10 +87,11 @@ The properties are equivalent to AST node types from TxtNode.</p>
 }
 </code></pre>
 <p>If your rule wants to know when an <code>Str</code> node is found in the AST, then add a method called <code>context.Syntax.Str</code>, such as:</p>
-<pre><code class="hljs css language-js"><span class="hljs-comment">// ES6</span>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// ES2015+</span>
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">context</span>) </span>{
+    <span class="hljs-keyword">const</span> { Syntax } = context;
     <span class="hljs-keyword">return</span> {
-        [context.Syntax.Str](node) {
+        [Syntax.Str](node) {
             <span class="hljs-comment">// this method is called</span>
         }
     };
@@ -151,8 +152,9 @@ In textlint@11.1.0&lt;=, you had to write <code>[Syntax.Document + &quot;:exit&q
 <li>This method return file path that is linting target.</li>
 <li>e.g.) <code>context.getFilePath(): // =&gt; /path/to/file.md or undefined</code></li>
 </ul></li>
-<li><code>getConfigBaseDir(): string | undefined</code> (New in <a href="https://github.com/textlint/textlint/releases/tag/textlint%409.0.0" title="9.0.0">9.0.0</a>)
+<li><code>getConfigBaseDir(): string | undefined</code>
 <ul>
+<li>New in <a href="https://github.com/textlint/textlint/releases/tag/textlint%409.0.0" title="9.0.0">9.0.0</a></li>
 <li>Available <a href="https://github.com/textlint/get-config-base-dir" title="@textlint/get-config-base-dir">@textlint/get-config-base-dir</a> polyfill for backward compatibility</li>
 <li>This method return config base directory path that is the place of <code>.textlintrc</code></li>
 <li>e.g.) <code>/path/to/dir/.textlintrc</code></li>
@@ -161,44 +163,194 @@ In textlint@11.1.0&lt;=, you had to write <code>[Syntax.Document + &quot;:exit&q
 <li><code>fixer</code>
 <ul>
 <li>This is creator object of fix command.</li>
-<li>See <a href="/docs/rule-fixable.html">How to create Fixable Rule?</a> for details</li>
+<li>See <a href="/docs/rule-fixable.html">How to create Fixable Rule?</a> for more details</li>
+</ul></li>
+<li><code>locator</code>
+<ul>
+<li>New in <a href="https://github.com/textlint/textlint/releases/tag/v12.2.0">12.2.0</a></li>
+<li>This utility provide range methods for <code>padding</code> property to <code>RuleError</code></li>
+<li>See <a href="#RuleError">RuleError</a> for more details</li>
 </ul></li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="ruleerror"></a><a href="#ruleerror" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>RuleError</h2>
-<p>RuleError is an object like Error.
+<p><code>RuleError</code> is an Error object for reporting.
 Use it with <code>report</code> function.</p>
 <ul>
-<li><code>RuleError(&lt;message&gt;, [{ line , column }])</code>
+<li><code>report(node, new RuleError(&lt;message&gt;))</code>
 <ul>
-<li>e.g.) <code>new context.RuleError(&quot;Found rule error&quot;);</code></li>
-<li>e.g.) <code>new context.RuleError(&quot;Found rule error&quot;, { line: paddingLine, column: paddingColumn});</code></li>
+<li>report new error</li>
+<li>textlint show the <code>&lt;mesage&gt;</code> against <code>node</code>'s range.</li>
 </ul></li>
-<li><code>RuleError(&lt;message&gt;, [{ index }])</code>
+<li><code>report(node, new RuleError(&lt;message&gt;, { padding }))</code>
 <ul>
-<li>e.g.) <code>new context.RuleError(&quot;Found rule error&quot;, { index: paddingIndex });</code></li>
+<li>report new error with <code>padding</code>.</li>
+<li>textlint show the <code>&lt;mesage&gt;</code> against <code>node</code>'s range + <code>padding</code>.</li>
+<li>You can control correct error range by <code>padding</code> property of <code>RuleError</code></li>
 </ul></li>
 </ul>
-<pre><code class="hljs css language-js"><span class="hljs-comment">// No padding information</span>
+<p>Example: report the <code>Str</code> node that is typo.</p>
+<pre><code class="hljs"><span class="hljs-section">This is typo.
+^^^^^^^^^^^^^</span>
+<span class="hljs-code">      |</span>
+<span class="hljs-code">  Found a typo.</span>
+</code></pre>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">context</span>) </span>{
+    <span class="hljs-keyword">const</span> { Syntax, report, RuleError, getSource } = context;
+    <span class="hljs-keyword">return</span> {
+        [Syntax.Str](node) {
+            <span class="hljs-comment">// get source code of this `node`</span>
+            <span class="hljs-keyword">const</span> text = getSource(node);
+            <span class="hljs-keyword">if</span> (<span class="hljs-regexp">/typo/</span>.test(text)) {
+                <span class="hljs-comment">// report error</span>
+                report(node, <span class="hljs-keyword">new</span> RuleError(<span class="hljs-string">"Found a typo"</span>));
+            }
+        }
+    };
+}
+</code></pre>
+<p>Example: report <code>typo</code> string that is typo using <code>padding</code></p>
+<pre><code class="hljs">This <span class="hljs-keyword">is</span> typo.
+        ^^^^
+          |
+        Found a typo.
+</code></pre>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">context</span>) </span>{
+    <span class="hljs-keyword">const</span> { Syntax, report, RuleError, getSource, locator } = context;
+    <span class="hljs-keyword">return</span> {
+        [Syntax.Str](node) {
+            <span class="hljs-comment">// get source code of this `node`</span>
+            <span class="hljs-keyword">const</span> text = getSource(node);
+            <span class="hljs-keyword">const</span> match = text.match(<span class="hljs-regexp">/typo/</span>);
+            <span class="hljs-keyword">if</span> (match) {
+                <span class="hljs-comment">// report error with padding</span>
+                <span class="hljs-comment">// node's start + padding's range</span>
+                <span class="hljs-comment">// As a result, report the error that is [node.range[0] + typo.index, node.range[1] + typo.index + type.length]</span>
+                report(
+                    node,
+                    <span class="hljs-keyword">new</span> RuleError(<span class="hljs-string">"Found a typo"</span>, {
+                        <span class="hljs-attr">padding</span>: locator.range([match.index, match.index + match[<span class="hljs-number">0</span>].length])
+                    })
+                );
+            }
+        }
+    };
+}
+</code></pre>
+<p>The <code>context.locator</code> object has the following methods:</p>
+<p>-<code>locator.at(index)</code> - return padding value that is relative index from node's start index.</p>
+<ul>
+<li>The <code>index</code> value is 0-based value</li>
+<li>This method is alias to <code>locator.range([index, index + 1])</code>
+-<code>locator.range([startIndex, endIndex])</code> - return padding value that is relative range from node's start index</li>
+<li>Each <code>index</code> value is 0-based value
+-<code>locator.loc({ start: { line, column }, end: { line, column })</code> - return padding value that is relative location from node's start loc</li>
+<li>:memo: This <code>line</code> and <code>column</code> is relative value. It is not absolute value. So, These are 0-based value.</li>
+</ul>
+<pre><code class="hljs css language-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> TextlintRulePaddingLocator = {
+    <span class="hljs-comment">/**
+     * at's index is 0-based value.
+     * It is alias to `range([index, index + 1])`
+     * @param index relative index from node's start position
+     */</span>
+    at(index: <span class="hljs-built_in">number</span>): TextlintRuleErrorPaddingLocation;
+    <span class="hljs-comment">/**
+     * range's index is 0-based value
+     * @param range relative range from node's start position
+     */</span>
+    range(range: readonly [startIndex: <span class="hljs-built_in">number</span>, endIndex: <span class="hljs-built_in">number</span>]): TextlintRuleErrorPaddingLocation;
+    <span class="hljs-comment">/**
+     * line is relative padding value from node's start position
+     * column is relative padding value from node's start position
+     * @param location relative location from node's start position
+     */</span>
+    loc(location: {
+        start: {
+            line: <span class="hljs-built_in">number</span>;
+            column: <span class="hljs-built_in">number</span>;
+        };
+        end: {
+            line: <span class="hljs-built_in">number</span>;
+            column: <span class="hljs-built_in">number</span>;
+        };
+    }): TextlintRuleErrorPaddingLocation;
+};
+</code></pre>
+<p>Examples</p>
+<pre><code class="hljs css language-ts"><span class="hljs-comment">// locator.at</span>
+report(node, <span class="hljs-keyword">new</span> RuleError(message, {
+  padding: locator.at(<span class="hljs-number">11</span>)
+}));
+<span class="hljs-comment">// locator.range</span>
+report(node, <span class="hljs-keyword">new</span> RuleError(message, {
+  padding: locator.range([<span class="hljs-number">5</span>, <span class="hljs-number">10</span>])
+}));
+<span class="hljs-comment">// locator.loc</span>
+report(node, <span class="hljs-keyword">new</span> RuleError(message, {
+  padding: locator.loc({
+      start: {
+          line: <span class="hljs-number">1</span>,
+          column: <span class="hljs-number">1</span>
+      },
+      end: {
+          line: <span class="hljs-number">2</span>,
+          column: <span class="hljs-number">2</span>
+      }
+  })
+}));
+</code></pre>
+<p>:memo: <code>padding</code> option and <code>locator</code> object are introduced in textlint v12.2.0+.
+You can declare your dependency on textlint in <code>package.json</code> using the <a href="https://docs.npmjs.com/files/package.json#peerdependencies">peerDependencies</a> field.</p>
+<pre><code class="hljs css language-json5">  <span class="hljs-string">"peerDependencies"</span>: {
+    <span class="hljs-string">"textlint"</span>: <span class="hljs-string">"&gt;= 12.2.0"</span>
+  }
+</code></pre>
+<p><details>
+<summary>Deprecated: { line, column } and { index } properties</summary></p>
+<p><code>{ line, column }</code> and <code>{ index }</code> properties are deprecated.
+Instead of these, textlint v12.2.0 introduce <code>padding</code> property and <code>locator</code> object.</p>
+<p>Deprecated way:</p>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// report without padding</span>
 <span class="hljs-keyword">const</span> error = <span class="hljs-keyword">new</span> RuleError(<span class="hljs-string">"message"</span>);
-<span class="hljs-comment">//</span>
 <span class="hljs-comment">// OR</span>
-<span class="hljs-comment">// add location-based padding</span>
+<span class="hljs-comment">// report with location-based padding</span>
 <span class="hljs-keyword">const</span> paddingLine = <span class="hljs-number">1</span>;
 <span class="hljs-keyword">const</span> paddingColumn = <span class="hljs-number">1</span>;
 <span class="hljs-keyword">const</span> errorWithPadding = <span class="hljs-keyword">new</span> RuleError(<span class="hljs-string">"message"</span>, {
     <span class="hljs-attr">line</span>: paddingLine, <span class="hljs-comment">// padding line number from node.loc.start.line. default: 0</span>
     <span class="hljs-attr">column</span>: paddingColumn <span class="hljs-comment">// padding column number from node.loc.start.column. default: 0</span>
 });
-<span class="hljs-comment">// context.report(node, errorWithPadding);</span>
-<span class="hljs-comment">//</span>
 <span class="hljs-comment">// OR</span>
-<span class="hljs-comment">// add index-based padding</span>
+<span class="hljs-comment">// report with index-based padding</span>
 <span class="hljs-keyword">const</span> paddingIndex = <span class="hljs-number">1</span>;
 <span class="hljs-keyword">const</span> errorWithPaddingIndex = <span class="hljs-keyword">new</span> RuleError(<span class="hljs-string">"message"</span>, {
     <span class="hljs-attr">index</span>: paddingIndex <span class="hljs-comment">// padding index value from `node.range[0]`. default: 0</span>
 });
-<span class="hljs-comment">// context.report(node, errorWithPaddingIndex);</span>
 </code></pre>
+<p>Current way:</p>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// No padding information</span>
+<span class="hljs-comment">// It means, this error point out the whole node</span>
+<span class="hljs-keyword">const</span> error = <span class="hljs-keyword">new</span> RuleError(<span class="hljs-string">"message"</span>);
+<span class="hljs-comment">// OR</span>
+<span class="hljs-keyword">const</span> errorWithPadding = <span class="hljs-keyword">new</span> RuleError(<span class="hljs-string">"message"</span>, {
+    <span class="hljs-attr">padding</span>: locator.loc({
+        <span class="hljs-attr">start</span>: {
+            <span class="hljs-attr">line</span>: <span class="hljs-number">1</span>, <span class="hljs-comment">// padding line number from node.loc.start.line. default: 0</span>
+            <span class="hljs-attr">column</span>: <span class="hljs-number">1</span> <span class="hljs-comment">// padding column number from node.loc.start.column. default: 0</span>
+        },
+        <span class="hljs-attr">end</span>: {
+            <span class="hljs-attr">line</span>: <span class="hljs-number">1</span>, <span class="hljs-comment">// padding line number from node.loc.start.line. default: 0</span>
+            <span class="hljs-attr">column</span>: <span class="hljs-number">2</span> <span class="hljs-comment">// padding column number from node.loc.start.column. default: 0</span>
+        }
+    })
+});
+<span class="hljs-comment">// OR</span>
+<span class="hljs-keyword">const</span> paddingIndex = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">const</span> errorWithPaddingIndex = <span class="hljs-keyword">new</span> RuleError(<span class="hljs-string">"message"</span>, {
+    <span class="hljs-comment">// padding [startIndex, endIndex] from node's start index.</span>
+    <span class="hljs-attr">padding</span>: locator.range([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>])
+});
+</code></pre>
+<p></details></p>
 <h3><a class="anchor" aria-hidden="true" id="warning-caution-warning"></a><a href="#warning-caution-warning" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>:warning: Caution :warning:</h3>
 <ul>
 <li><code>index</code> could <strong>not</strong> used with <code>line</code> and <code>column</code>.
@@ -211,13 +363,14 @@ Use it with <code>report</code> function.</p>
 <p>You will use mainly method is <code>context.report()</code>, which publishes an error (defined in each rules).</p>
 <p>For example:</p>
 <pre><code class="hljs css language-js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">context</span>) </span>{
+    <span class="hljs-keyword">const</span> { Syntax, report, RuleError } = context;
     <span class="hljs-keyword">return</span> {
-        [context.Syntax.Str](node) {
+        [Syntax.Str](node) {
             <span class="hljs-comment">// get source code of this `node`</span>
             <span class="hljs-keyword">const</span> text = context.getSource(node);
             <span class="hljs-keyword">if</span> (<span class="hljs-regexp">/found wrong use-case/</span>.test(text)) {
                 <span class="hljs-comment">// report error</span>
-                context.report(node, <span class="hljs-keyword">new</span> context.RuleError(<span class="hljs-string">"Found wrong"</span>));
+                report(node, <span class="hljs-keyword">new</span> RuleError(<span class="hljs-string">"Found wrong"</span>));
             }
         }
     };
@@ -275,8 +428,7 @@ Test textlint rule by <a href="https://www.npmjs.com/package/textlint-tester" ti
  * <span class="hljs-doctag">@param <span class="hljs-type">{RuleContext}</span> <span class="hljs-variable">context</span></span>
  */</span>
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">context</span>) </span>{
-    <span class="hljs-keyword">const</span> helper = <span class="hljs-keyword">new</span> RuleHelper(context);
-    <span class="hljs-keyword">const</span> { Syntax, getSource, RuleError, report } = context;
+    <span class="hljs-keyword">const</span> { Syntax, getSource, RuleError, report, locator } = context;
     <span class="hljs-keyword">return</span> {
         <span class="hljs-comment">/*
             # Header
@@ -293,7 +445,7 @@ Test textlint rule by <a href="https://www.npmjs.com/package/textlint-tester" ti
                 report(
                     node,
                     <span class="hljs-keyword">new</span> RuleError(<span class="hljs-string">`Found TODO: '<span class="hljs-subst">${text}</span>'`</span>, {
-                        <span class="hljs-attr">index</span>: match.index
+                        <span class="hljs-attr">padding</span>: locator.range([match.index, match.index + text.length])
                     })
                 );
             }
@@ -311,7 +463,7 @@ Test textlint rule by <a href="https://www.npmjs.com/package/textlint-tester" ti
                 report(
                     node,
                     <span class="hljs-keyword">new</span> context.RuleError(<span class="hljs-string">`Found TODO: '<span class="hljs-subst">${text}</span>'`</span>, {
-                        <span class="hljs-attr">index</span>: match.index
+                        <span class="hljs-attr">padding</span>: locator.range([match.index, match.index + text.length])
                     })
                 );
             }
@@ -373,48 +525,44 @@ $ textlint --rulesdir lib/ README.md -f pretty-error
         });
     });
 }
-<span class="hljs-comment">/**
- * <span class="hljs-doctag">@param <span class="hljs-type">{RuleContext}</span> <span class="hljs-variable">context</span></span>
- */</span>
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">context</span>) </span>{
-    <span class="hljs-keyword">const</span> { Syntax, getSource, RuleError, report } = context;
+    <span class="hljs-keyword">const</span> { Syntax, getSource, RuleError, report, locator } = context;
     <span class="hljs-keyword">return</span> {
         <span class="hljs-comment">/*
-            # Header
-            Todo: quick fix this.
-        */</span>
+        Todo: quick fix this.
+    */</span>
         [Syntax.Str](node) {
-            <span class="hljs-comment">// not apply this rule to the node that is child of `Link`, `Image` or `BlockQuote` Node.</span>
+            <span class="hljs-comment">// Ignore the node if the node is child of some Node types</span>
             <span class="hljs-keyword">if</span> (isNodeWrapped(node, [Syntax.Link, Syntax.Image, Syntax.BlockQuote])) {
                 <span class="hljs-keyword">return</span>;
             }
             <span class="hljs-comment">// get text from node</span>
             <span class="hljs-keyword">const</span> text = getSource(node);
-            <span class="hljs-comment">// does text contain "todo:"?</span>
-            <span class="hljs-keyword">const</span> match = text.match(<span class="hljs-regexp">/todo:/i</span>);
-            <span class="hljs-keyword">if</span> (match) {
-                <span class="hljs-keyword">const</span> todoText = text.substring(match.index);
+            <span class="hljs-comment">// Does the text contain "todo:"?</span>
+            <span class="hljs-keyword">const</span> matches = text.matchAll(<span class="hljs-regexp">/todo:/gi</span>);
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> match <span class="hljs-keyword">of</span> matches) {
+                <span class="hljs-keyword">const</span> index = match.index ?? <span class="hljs-number">0</span>;
+                <span class="hljs-keyword">const</span> length = match[<span class="hljs-number">0</span>].length;
                 report(
                     node,
-                    <span class="hljs-keyword">new</span> RuleError(<span class="hljs-string">`Found TODO: '<span class="hljs-subst">${todoText}</span>'`</span>, {
-                        <span class="hljs-comment">// correct position</span>
-                        <span class="hljs-attr">index</span>: match.index
+                    <span class="hljs-keyword">new</span> RuleError(<span class="hljs-string">`Found TODO: '<span class="hljs-subst">${text}</span>'`</span>, {
+                        <span class="hljs-attr">padding</span>: locator.range([index, index + length])
                     })
                 );
             }
         },
         <span class="hljs-comment">/*
-            # Header
-            - [ ] Todo
-        */</span>
+        - [ ] Todo
+    */</span>
         [Syntax.ListItem](node) {
             <span class="hljs-keyword">const</span> text = context.getSource(node);
-            <span class="hljs-keyword">const</span> match = text.match(<span class="hljs-regexp">/\[\s+\]\s/i</span>);
-            <span class="hljs-keyword">if</span> (match) {
+            <span class="hljs-comment">// Does the ListItem's text starts with `- [ ]`</span>
+            <span class="hljs-keyword">const</span> match = text.match(<span class="hljs-regexp">/^-\s\[\s+]\s/i</span>);
+            <span class="hljs-keyword">if</span> (match &amp;&amp; match.index !== <span class="hljs-literal">undefined</span>) {
                 report(
                     node,
                     <span class="hljs-keyword">new</span> context.RuleError(<span class="hljs-string">`Found TODO: '<span class="hljs-subst">${text}</span>'`</span>, {
-                        <span class="hljs-attr">index</span>: match.index
+                        <span class="hljs-attr">padding</span>: locator.range([match.index, match.index + match[<span class="hljs-number">0</span>].length])
                     })
                 );
             }
@@ -445,7 +593,7 @@ $ textlint --rulesdir lib/ README.md -f pretty-error
 <li>Run tests by Mocha</li>
 </ol>
 <p><code>test/textlint-rule-no-todo-test.js</code>:</p>
-<pre><code class="hljs css language-js"><span class="hljs-keyword">const</span> TextLintTester = <span class="hljs-built_in">require</span>(<span class="hljs-string">"textlint-tester"</span>);
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> TextLintTester <span class="hljs-keyword">from</span> <span class="hljs-string">"textlint-tester"</span>;
 <span class="hljs-keyword">const</span> tester = <span class="hljs-keyword">new</span> TextLintTester();
 <span class="hljs-comment">// rule</span>
 <span class="hljs-keyword">import</span> rule <span class="hljs-keyword">from</span> <span class="hljs-string">"../src/no-todo"</span>;
@@ -462,54 +610,34 @@ tester.run(<span class="hljs-string">"no-todo"</span>, rule, {
         <span class="hljs-string">"&gt; TODO: this is todo"</span>
     ],
     <span class="hljs-attr">invalid</span>: [
-        <span class="hljs-comment">// single match</span>
+        <span class="hljs-comment">// range</span>
         {
-            <span class="hljs-attr">text</span>: <span class="hljs-string">"TODO: this is TODO"</span>,
+            <span class="hljs-attr">text</span>: <span class="hljs-string">"- [ ] string"</span>,
+            <span class="hljs-comment">//     ^^^^^^</span>
             <span class="hljs-attr">errors</span>: [
                 {
-                    <span class="hljs-attr">message</span>: <span class="hljs-string">"Found TODO: 'TODO: this is TODO'"</span>,
-                    <span class="hljs-attr">line</span>: <span class="hljs-number">1</span>,
-                    <span class="hljs-attr">column</span>: <span class="hljs-number">1</span>
+                    <span class="hljs-attr">message</span>: <span class="hljs-string">"Found TODO: '- [ ] string'"</span>,
+                    <span class="hljs-attr">range</span>: [<span class="hljs-number">0</span>, <span class="hljs-number">6</span>]
                 }
             ]
         },
-        <span class="hljs-comment">// multiple match in multiple lines</span>
+        <span class="hljs-comment">// loc</span>
         {
-            <span class="hljs-attr">text</span>: <span class="hljs-string">`TODO: this is TODO
-            
-- [ ] TODO`</span>,
+            <span class="hljs-attr">text</span>: <span class="hljs-string">"- [ ] string"</span>,
+            <span class="hljs-comment">//     ^^^^^^</span>
             <span class="hljs-attr">errors</span>: [
                 {
-                    <span class="hljs-attr">message</span>: <span class="hljs-string">"Found TODO: 'TODO: this is TODO'"</span>,
-                    <span class="hljs-attr">line</span>: <span class="hljs-number">1</span>,
-                    <span class="hljs-attr">column</span>: <span class="hljs-number">1</span>
-                },
-                {
-                    <span class="hljs-attr">message</span>: <span class="hljs-string">"Found TODO: '- [ ] TODO'"</span>,
-                    <span class="hljs-attr">line</span>: <span class="hljs-number">3</span>,
-                    <span class="hljs-attr">column</span>: <span class="hljs-number">3</span>
-                }
-            ]
-        },
-        <span class="hljs-comment">// multiple hit items in a line</span>
-        {
-            <span class="hljs-attr">text</span>: <span class="hljs-string">"TODO: A TODO: B"</span>,
-            <span class="hljs-attr">errors</span>: [
-                {
-                    <span class="hljs-attr">message</span>: <span class="hljs-string">"Found TODO: 'TODO: A TODO: B'"</span>,
-                    <span class="hljs-attr">line</span>: <span class="hljs-number">1</span>,
-                    <span class="hljs-attr">column</span>: <span class="hljs-number">1</span>
-                }
-            ]
-        },
-        <span class="hljs-comment">// exact match or empty</span>
-        {
-            <span class="hljs-attr">text</span>: <span class="hljs-string">"THIS IS TODO:"</span>,
-            <span class="hljs-attr">errors</span>: [
-                {
-                    <span class="hljs-attr">message</span>: <span class="hljs-string">"Found TODO: 'TODO:'"</span>,
-                    <span class="hljs-attr">line</span>: <span class="hljs-number">1</span>,
-                    <span class="hljs-attr">column</span>: <span class="hljs-number">9</span>
+                    <span class="hljs-attr">message</span>: <span class="hljs-string">"Found TODO: '- [ ] string'"</span>,
+                    <span class="hljs-attr">loc</span>: {
+                        <span class="hljs-attr">start</span>: {
+                            <span class="hljs-attr">line</span>: <span class="hljs-number">1</span>,
+                            <span class="hljs-attr">column</span>: <span class="hljs-number">1</span>
+                        },
+                        <span class="hljs-attr">end</span>: {
+                            <span class="hljs-attr">line</span>: <span class="hljs-number">1</span>,
+                            <span class="hljs-attr">column</span>: <span class="hljs-number">7</span>
+                        }
+                    }
                 }
             ]
         }
@@ -521,14 +649,14 @@ tester.run(<span class="hljs-string">"no-todo"</span>, rule, {
 # or
 $(npm bin)/mocha test/
 </code></pre>
-<p>:information_source: Please see <a href="https://github.com/textlint-rule/textlint-rule-no-todo" title="azu/textlint-rule-no-todo">azu/textlint-rule-no-todo</a> for details.</p>
+<p>:information_source: Please see <a href="https://github.com/textlint-rule/textlint-rule-no-todo">textlint-rule-no-todo</a> for details.</p>
 <h3><a class="anchor" aria-hidden="true" id="rule-options"></a><a href="#rule-options" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Rule options</h3>
 <p><code>.textlintrc</code> is the config file for textlint.</p>
 <p>For example, <code>very-nice-rule</code>'s option is <code>{ &quot;key&quot;: &quot;value&quot; }</code> in <code>.textlintrc</code></p>
 <pre><code class="hljs css language-json">{
   <span class="hljs-attr">"rules"</span>: {
     <span class="hljs-attr">"very-nice-rule"</span>: {
-        <span class="hljs-attr">"key"</span>: <span class="hljs-string">"value"</span>
+      <span class="hljs-attr">"key"</span>: <span class="hljs-string">"value"</span>
     }
   }
 }
@@ -620,7 +748,7 @@ $(npm bin)/mocha test/
 <pre><code class="hljs css language-json">{
   <span class="hljs-attr">"name"</span>: <span class="hljs-string">"textlint-rule-no-todo"</span>,
   <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Your custom rules description"</span>,
-  <span class="hljs-attr">"version"</span>: <span class="hljs-string">"1.0.1"</span>,
+  <span class="hljs-attr">"version"</span>: <span class="hljs-string">"1.0.0"</span>,
   <span class="hljs-attr">"homepage"</span>: <span class="hljs-string">"https://github.com/textlint/textlint-custom-rules/"</span>,
   <span class="hljs-attr">"keywords"</span>: [
     <span class="hljs-string">"textlintrule"</span>
@@ -628,15 +756,14 @@ $(npm bin)/mocha test/
 }
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="faq-publishing"></a><a href="#faq-publishing" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>FAQ: Publishing</h3>
-<h4><a class="anchor" aria-hidden="true" id="q-textlint--55x-has-new-feature-my-rule-package-want-to-use-it"></a><a href="#q-textlint--55x-has-new-feature-my-rule-package-want-to-use-it" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Q. <code>textlint @ 5.5.x</code> has new feature. My rule package want to use it.</h4>
-<p>A. You should</p>
-<ul>
-<li>Add <code>textlint &gt;= 5.5</code> to <code>peerDependencies</code>
-<ul>
-<li>See example: <a href="https://github.com/textlint-rule/textlint-rule-no-todo/blob/50880b4e1c13782874a43714ee69900fc54a5348/package.json">textlint-rule-no-todo/package.json</a></li>
-</ul></li>
-<li>Release the rule package as <em>major</em> because it has breaking change.</li>
-</ul>
+<h4><a class="anchor" aria-hidden="true" id="q-textlint--xyz-has-new-feature-my-rule-package-require-it"></a><a href="#q-textlint--xyz-has-new-feature-my-rule-package-require-it" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Q. <code>textlint @ x.y.z</code> has new feature. My rule package require it</h4>
+<p>A. You should add <code>textlint &gt;= x.y.z</code> to <code>peerDependencies</code> in <code>package.json</code></p>
+<p>The recommended way to declare a dependency for future-proof compatibility is with the <code>&quot;&gt;=&quot;</code> range syntax, using the lowest required eslint version. For example:</p>
+<pre><code class="hljs css language-json5">  <span class="hljs-string">"peerDependencies"</span>: {
+    <span class="hljs-string">"textlint"</span>: <span class="hljs-string">"&gt;= 5.5.0"</span>
+  }
+</code></pre>
+<p>See example: <a href="https://github.com/textlint-rule/textlint-rule-no-todo/blob/50880b4e1c13782874a43714ee69900fc54a5348/package.json">textlint-rule-no-todo/package.json</a></p>
 <h4><a class="anchor" aria-hidden="true" id="q-textlint-does-major-update-do-my-rule-package-major-update"></a><a href="#q-textlint-does-major-update-do-my-rule-package-major-update" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Q. <code>textlint</code> does major update. Do my rule package major update?</h4>
 <p>A. If the update contains a breaking change on your rule, should update as <em>major</em>.
 If the update <strong>does not</strong> contain a breaking change on your rule, update as <em>minor</em>.</p>
