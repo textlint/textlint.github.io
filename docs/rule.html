@@ -246,6 +246,7 @@ Use it with <code>report</code> function.</p>
 -<code>locator.loc({ start: { line, column }, end: { line, column })</code> - return padding value that is relative location from node's start loc</li>
 <li>:memo: This <code>line</code> and <code>column</code> is relative value. It is not absolute value. So, These are 0-based value.</li>
 </ul>
+<p>:memo: <code>context.locator</code> object in introduced in <a href="https://github.com/textlint/textlint/releases/tag/v12.2.0">v12.2.0</a>.</p>
 <pre><code class="hljs css language-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> TextlintRulePaddingLocator = {
     <span class="hljs-comment">/**
      * at's index is 0-based value.
