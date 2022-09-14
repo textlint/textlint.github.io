@@ -91,13 +91,13 @@ npm <span class="hljs-keyword">install</span> <span class="hljs-comment">--save-
 <span class="hljs-code">`- [ ]`</span> is a code and not error.
 
 </code></pre>
-<pre><code class="hljs">.<span class="hljs-regexp">/node_modules/</span>.bin/textlint --rule <span class="hljs-literal">no</span>-todo file.md
+<pre><code class="hljs">npx textlint --rule <span class="hljs-keyword">no</span>-todo <span class="hljs-keyword">file</span>.md
 </code></pre>
 <p><img src="/docs/assets/screenshot-lint-error.png" alt="screenshot lint error"></p>
 <h2><a class="anchor" aria-hidden="true" id="configuration"></a><a href="#configuration" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configuration</h2>
 <p>We recommend using <code>textlint</code> with <code>.textlintrc</code> configuration file.</p>
 <p>Create a <code>.textlintrc</code> file in your workspace:</p>
-<pre><code class="hljs"><span class="hljs-string">./node_modules/.bin/textlint</span> <span class="hljs-params">--init</span>
+<pre><code class="hljs">npx textlint <span class="hljs-comment">--init</span>
 </code></pre>
 <p>In this file, you'll see some rules configured like this:</p>
 <pre><code class="hljs css language-json">{
@@ -108,7 +108,7 @@ npm <span class="hljs-keyword">install</span> <span class="hljs-comment">--save-
 }
 </code></pre>
 <p>If there is a <code>.textlintrc</code> file in your workspace, <code>textlint</code> loads <code>.textlintrc</code> automatically. So you can run textlint without any command line options:</p>
-<pre><code class="hljs">./node_modules/.bin/textlint <span class="hljs-built_in">file</span>.md
+<pre><code class="hljs">npx textlint <span class="hljs-built_in">file</span>.md
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="next-steps"></a><a href="#next-steps" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Next Steps</h2>
 <ul>
