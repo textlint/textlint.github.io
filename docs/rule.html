@@ -306,9 +306,14 @@ report(node, <span class="hljs-keyword">new</span> RuleError(message, {
 }));
 </code></pre>
 <p>:memo: <code>padding</code> option and <code>locator</code> object are introduced in textlint v12.2.0+.
-You can declare your dependency on textlint in <code>package.json</code> using the <a href="https://docs.npmjs.com/files/package.json#peerdependencies">peerDependencies</a> field.</p>
+You can declare your dependency on textlint in <code>package.json</code> using the <a href="https://docs.npmjs.com/files/package.json#peerdependencies">peerDependencies</a> and <a href="https://docs.npmjs.com/cli/v8/configuring-npm/package-json#peerdependenciesmeta">peerDependenciesMeta</a> fields.</p>
 <pre><code class="hljs css language-json5">  <span class="hljs-string">"peerDependencies"</span>: {
     <span class="hljs-string">"textlint"</span>: <span class="hljs-string">"&gt;= 12.2.0"</span>
+  },
+  <span class="hljs-string">"peerDependenciesMeta"</span>: {
+    <span class="hljs-string">"textlint"</span>: {
+      <span class="hljs-string">"optional"</span>: <span class="hljs-literal">true</span>
+    }
   }
 </code></pre>
 <p><details>
