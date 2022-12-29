@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Use as Node Modules · textlint</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Overview"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Use as Node Modules · textlint"/><meta property="og:type" content="website"/><meta property="og:url" content="https://textlint.github.io/index.html"/><meta property="og:description" content="## Overview"/><meta property="og:image" content="https://textlint.github.io/img/textlint-icon_256x256.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://textlint.github.io/img/textlint-icon_256x256.png"/><link rel="shortcut icon" href="/img/textlint-icon_256x256.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://textlint.github.io/blog/atom.xml" title="textlint Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://textlint.github.io/blog/feed.xml" title="textlint Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/textlint-icon_256x256.png" alt="textlint"/><h2 class="headerTitleWithLogo">textlint</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/getting-started.html" target="_self">Docs</a></li><li class=""><a href="https://github.com/textlint/textlint/wiki/Collection-of-textlint-rule" target="_self">Rules</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><li class=""><a href="/help.html" target="_self">Help</a></li><li class=""><a href="https://github.com/textlint/textlint" target="_self">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Developer Guide</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">User Manual</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/getting-started.html">Getting Started with textlint</a></li><li class="navListItem"><a class="navItem" href="/docs/configuring.html">Configuring textlint</a></li><li class="navListItem"><a class="navItem" href="/docs/ignore.html">Ignoring Text</a></li><li class="navListItem"><a class="navItem" href="/docs/integrations.html">Integrating with Editors, Tools, etc..</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Developer Guide</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/rule.html">Creating Rules</a></li><li class="navListItem"><a class="navItem" href="/docs/filter-rule.html">Creating Filter Rule</a></li><li class="navListItem"><a class="navItem" href="/docs/rule-fixable.html">Creating Fixable Rule</a></li><li class="navListItem"><a class="navItem" href="/docs/rule-preset.html">Creating Preset</a></li><li class="navListItem"><a class="navItem" href="/docs/rule-advanced.html">Advanced: Paragraph Rule</a></li><li class="navListItem"><a class="navItem" href="/docs/rule-tips-after-all.html">How to implement &quot;after-all&quot; in the rule?</a></li><li class="navListItem"><a class="navItem" href="/docs/plugin.html">Plugin</a></li><li class="navListItem"><a class="navItem" href="/docs/formatter.html">Formatter</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/use-as-modules.html">Use as Node Modules</a></li><li class="navListItem"><a class="navItem" href="/docs/txtnode.html">TxtAST Interface</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Contributing</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/contributing.html">Contributing Guideline</a></li></ul></div></div></section></div><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Use as Node Modules · textlint</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Overview"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Use as Node Modules · textlint"/><meta property="og:type" content="website"/><meta property="og:url" content="https://textlint.github.io/index.html"/><meta property="og:description" content="## Overview"/><meta property="og:image" content="https://textlint.github.io/img/textlint-icon_256x256.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://textlint.github.io/img/textlint-icon_256x256.png"/><link rel="shortcut icon" href="/img/textlint-icon_256x256.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://textlint.github.io/blog/atom.xml" title="textlint Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://textlint.github.io/blog/feed.xml" title="textlint Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/textlint-icon_256x256.png" alt="textlint"/><h2 class="headerTitleWithLogo">textlint</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/getting-started.html" target="_self">Docs</a></li><li class=""><a href="https://github.com/textlint/textlint/wiki/Collection-of-textlint-rule" target="_self">Rules</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><li class=""><a href="/help.html" target="_self">Help</a></li><li class=""><a href="https://github.com/textlint/textlint" target="_self">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Developer Guide</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">User Manual</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/getting-started.html">Getting Started with textlint</a></li><li class="navListItem"><a class="navItem" href="/docs/cli.html">Command Line Interface</a></li><li class="navListItem"><a class="navItem" href="/docs/configuring.html">Configuring textlint</a></li><li class="navListItem"><a class="navItem" href="/docs/ignore.html">Ignoring Text</a></li><li class="navListItem"><a class="navItem" href="/docs/integrations.html">Integrating with Editors, Tools, etc..</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Developer Guide</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/rule.html">Creating Rules</a></li><li class="navListItem"><a class="navItem" href="/docs/filter-rule.html">Creating Filter Rule</a></li><li class="navListItem"><a class="navItem" href="/docs/rule-fixable.html">Creating Fixable Rule</a></li><li class="navListItem"><a class="navItem" href="/docs/rule-preset.html">Creating Preset</a></li><li class="navListItem"><a class="navItem" href="/docs/rule-advanced.html">Advanced: Paragraph Rule</a></li><li class="navListItem"><a class="navItem" href="/docs/rule-tips-after-all.html">How to implement &quot;after-all&quot; in the rule?</a></li><li class="navListItem"><a class="navItem" href="/docs/plugin.html">Plugin</a></li><li class="navListItem"><a class="navItem" href="/docs/formatter.html">Formatter</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/use-as-modules.html">Use as Node Modules</a></li><li class="navListItem"><a class="navItem" href="/docs/txtnode.html">TxtAST Interface</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Contributing</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/contributing.html">Contributing Guideline</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -116,6 +116,7 @@
 <span class="hljs-meta">"use strict"</span>;
 <span class="hljs-keyword">const</span> TextLintEngine = <span class="hljs-built_in">require</span>(<span class="hljs-string">"textlint"</span>).TextLintEngine;
 <span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">"path"</span>);
+
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">lintFile</span>(<span class="hljs-params">filePath</span>) </span>{
     <span class="hljs-keyword">const</span> options = {
         <span class="hljs-comment">// load rules from [../rules]</span>
@@ -124,7 +125,7 @@
     };
     <span class="hljs-keyword">const</span> engine = <span class="hljs-keyword">new</span> TextLintEngine(options);
     <span class="hljs-keyword">const</span> filePathList = [path.resolve(process.cwd(), filePath)];
-    <span class="hljs-keyword">return</span> engine.executeOnFiles(filePathList).then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">results</span>) </span>{
+    <span class="hljs-keyword">return</span> engine.executeOnFiles(filePathList).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">results</span>) </span>{
         <span class="hljs-keyword">if</span> (engine.isErrorResults(results)) {
             <span class="hljs-keyword">const</span> output = engine.formatResults(results);
             <span class="hljs-built_in">console</span>.log(output);
@@ -134,13 +135,91 @@
     });
 }
 
-lintFile(<span class="hljs-string">`<span class="hljs-subst">${__dirname}</span>/README.md`</span>).catch(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">error</span>) </span>{
+lintFile(<span class="hljs-string">`<span class="hljs-subst">${__dirname}</span>/README.md`</span>).catch(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error</span>) </span>{
     <span class="hljs-built_in">console</span>.error(error);
     process.exit(<span class="hljs-number">1</span>);
 });
 </code></pre>
+<h2><a class="anchor" aria-hidden="true" id="new-apis"></a><a href="#new-apis" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>New APIs</h2>
+<p>textlint v12.3.0 introduce new APIs.
+textlint will drop support old APIs(<code>textlint</code>, <code>TextLintEngine</code>, <code>TextFixEngine</code>, and <code>TextLintCore</code>) in the future.</p>
+<p>:memo: old APIs can not support ECMAScript modules, new APIs support ECMAScript modules.</p>
+<ul>
+<li><code>createLinter</code>: create linter instance
+<ul>
+<li><code>lintFiles(files): Promise&lt;TextlintResult[]&gt;</code>: lint files and return linter messages</li>
+<li><code>lintText(text, filePath): Promise&lt;TextlintResult&gt;</code> lint text with virtual filePath and return linter messages</li>
+<li><code>fixFiles(files): Promise&lt;TextlintFixResult[]&gt;</code> lint text and return fixer messages</li>
+<li><code>fixText(text, filePath): Promise&lt;TextlintFixResult&gt;</code> lint text with virtual filePath and return fixer messages
+<ul>
+<li><code>fixFiles</code> and <code>fixText</code> does not modify files</li>
+</ul></li>
+</ul></li>
+<li><code>loadTextlintrc</code>: load <code>.textlintrc</code> config file and return a descriptor object</li>
+<li><code>loadLinerFormatter</code> and <code>loadFixerFormatter</code>: load formatter</li>
+</ul>
+<p>Lint files and output to console.</p>
+<pre><code class="hljs css language-ts"><span class="hljs-keyword">import</span> { createLinter, loadTextlintrc, loadLinterFormatter } <span class="hljs-keyword">from</span> <span class="hljs-string">"textlint"</span>;
+<span class="hljs-comment">// descriptor is a structure object for linter</span>
+<span class="hljs-comment">// It includes rules, plugins, and options</span>
+<span class="hljs-keyword">const</span> descriptor = <span class="hljs-keyword">await</span> loadTextlintrc();
+<span class="hljs-keyword">const</span> linter = createLinter({
+    descriptor
+});
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> linter.lintFiles([<span class="hljs-string">"*.md"</span>]);
+<span class="hljs-comment">// textlint has two types formatter sets for linter and fixer</span>
+<span class="hljs-keyword">const</span> formatter = <span class="hljs-keyword">await</span> loadLinterFormatter({ formatterName: <span class="hljs-string">"stylish"</span> })
+<span class="hljs-keyword">const</span> output = formatter.format(results);
+<span class="hljs-built_in">console</span>.log(output);
+</code></pre>
+<p>Fix text and get the fixed text.</p>
+<pre><code class="hljs css language-ts"><span class="hljs-keyword">import</span> { createLinter, loadTextlintrc, loadFixerFormatter } <span class="hljs-keyword">from</span> <span class="hljs-string">"textlint"</span>;
+<span class="hljs-comment">// descriptor is a structure object for linter</span>
+<span class="hljs-comment">// It includes rules, plugins, and options</span>
+<span class="hljs-keyword">const</span> descriptor = <span class="hljs-keyword">await</span> loadTextlintrc();
+<span class="hljs-keyword">const</span> linter = createLinter({
+    descriptor
+});
+<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> linter.fixText(<span class="hljs-string">"TODO: fix me"</span>);
+<span class="hljs-built_in">console</span>.log(result.output); <span class="hljs-comment">// fixed result</span>
+</code></pre>
+<p>Add custom rules and plugins.</p>
+<pre><code class="hljs css language-ts"><span class="hljs-keyword">import</span> { createLinter, loadTextlintrc } <span class="hljs-keyword">from</span> <span class="hljs-string">"textlint"</span>;
+<span class="hljs-keyword">import</span> { TextlintKernelDescriptor } <span class="hljs-keyword">from</span> <span class="hljs-string">"@textlint/kernel"</span>;
+<span class="hljs-keyword">import</span> { moduleInterop } <span class="hljs-keyword">from</span> <span class="hljs-string">"@textlint/module-interop"</span>;
+<span class="hljs-comment">// Create a descriptor for custom rules and plugins</span>
+<span class="hljs-keyword">const</span> customDescriptor = <span class="hljs-keyword">new</span> TextlintKernelDescriptor({
+    rules: [
+        {
+            ruleId: <span class="hljs-string">"custom-rule"</span>,
+            rule: moduleInterop((<span class="hljs-keyword">await</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">"./custom-plugin"</span>)).default)
+        }
+    ],
+    plugins: [
+        {
+            pluginId: <span class="hljs-string">"custom-plugin"</span>,
+            plugin: moduleInterop((<span class="hljs-keyword">await</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">"./custom-plugin"</span>)).default)
+        }
+    ]
+});
+<span class="hljs-keyword">const</span> textlintrcDescriptor = <span class="hljs-keyword">await</span> loadTextlintrc();
+<span class="hljs-keyword">const</span> linter = createLinter({
+    <span class="hljs-comment">// merge customDescriptor and textlintrcDescriptor</span>
+    <span class="hljs-comment">// if same ruleId or pluginId, customDescriptor is used.</span>
+    descriptor: customDescriptor.concat(textlintrcDescriptor)
+});
+<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> linter.lintText(<span class="hljs-string">"TODO: fix me"</span>);
+<span class="hljs-built_in">console</span>.log(result);
+</code></pre>
+<p>Get lintable file extensions.
+<code>textlintrcDescriptor.availableExtensions</code> provide list of supported file extensions.</p>
+<pre><code class="hljs css language-ts"><span class="hljs-keyword">import</span> { createLinter, loadTextlintrc } <span class="hljs-keyword">from</span> <span class="hljs-string">"textlint"</span>;
+<span class="hljs-keyword">const</span> textlintrcDescriptor = <span class="hljs-keyword">await</span> loadTextlintrc();
+<span class="hljs-keyword">const</span> availableExtensions = textlintrcDescriptor.availableExtensions;
+<span class="hljs-built_in">console</span>.log(availableExtensions); <span class="hljs-comment">// =&gt; [".md", ".txt"]</span>
+</code></pre>
 <h2><a class="anchor" aria-hidden="true" id="testing"></a><a href="#testing" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Testing</h2>
-<p>You can use <a href="https://www.npmjs.com/package/textlint-tester" title="textlint-tester">textlint-tester</a> for testing your custom rule.</p>
+<p>You can use <a href="https://www.npmjs.com/package/textlint-tester">textlint-tester</a> for testing your custom rule.</p>
 <ul>
 <li><a href="/docs/rule.html">rule.md</a></li>
 <li><a href="https://www.npmjs.com/package/textlint-tester" title="textlint-tester">textlint-tester</a></li>
@@ -149,7 +228,7 @@ lintFile(<span class="hljs-string">`<span class="hljs-subst">${__dirname}</span>
 <ul>
 <li><a href="https://github.com/azu/textlint-rule-spellcheck-tech-word/blob/master/test/test.js" title="spellcheck-tech-word-textlint-rule/test.js at master · azu/spellcheck-tech-word-textlint-rule">spellcheck-tech-word-textlint-rule/test.js at master · azu/spellcheck-tech-word-textlint-rule</a></li>
 </ul>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/formatter.html"><span class="arrow-prev">← </span><span>Formatter</span></a><a class="docs-next button" href="/docs/txtnode.html"><span class="function-name-prevnext">TxtAST Interface</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#overview">Overview</a></li><li><a href="#architecture">Architecture</a><ul class="toc-headings"><li><a href="#clicommand-line-interface">CLI(Command Line Interface)</a></li><li><a href="#engine">Engine</a></li><li><a href="#core">Core</a></li></ul></li><li><a href="#example">Example</a></li><li><a href="#testing">Testing</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/textlint-icon_256x256.png" alt="textlint" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/en/configuring.html">User Manual</a><a href="/docs/en/rule.html">Developer Guide</a></div><div><h5>Community</h5><a href="https://gitter.im/textlint-ja/textlint-ja">Project Chat</a></div><div><h5>More</h5><a href="/blog">Blog</a><a href="https://github.com/textlint/textlint">GitHub</a><a class="github-button" href="https://github.com/textlint/textlint" data-icon="octicon-star" data-count-href="/textlint/textlint/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2022 textlint organization</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/formatter.html"><span class="arrow-prev">← </span><span>Formatter</span></a><a class="docs-next button" href="/docs/txtnode.html"><span class="function-name-prevnext">TxtAST Interface</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#overview">Overview</a></li><li><a href="#architecture">Architecture</a><ul class="toc-headings"><li><a href="#clicommand-line-interface">CLI(Command Line Interface)</a></li><li><a href="#engine">Engine</a></li><li><a href="#core">Core</a></li></ul></li><li><a href="#example">Example</a></li><li><a href="#new-apis">New APIs</a></li><li><a href="#testing">Testing</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/textlint-icon_256x256.png" alt="textlint" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/en/configuring.html">User Manual</a><a href="/docs/en/rule.html">Developer Guide</a></div><div><h5>Community</h5><a href="https://gitter.im/textlint-ja/textlint-ja">Project Chat</a></div><div><h5>More</h5><a href="/blog">Blog</a><a href="https://github.com/textlint/textlint">GitHub</a><a class="github-button" href="https://github.com/textlint/textlint" data-icon="octicon-star" data-count-href="/textlint/textlint/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2022 textlint organization</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;
