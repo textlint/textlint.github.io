@@ -57,90 +57,14 @@
         </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/textlint/textlint/edit/master/docs/use-as-modules.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Use as Node Modules</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="overview"></a><a href="#overview" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Overview</h2>
 <p><img src="/docs/assets/architecture.png" alt="overview"></p>
 <p><code>textlint</code> module expose these header at <a href="https://github.com/textlint/textlint/blob/master/packages/textlint/src/index.ts">index.js</a></p>
-<pre><code class="hljs css language-js"><span class="hljs-comment">// Level of abstraction(descending order)</span>
-<span class="hljs-comment">// cli &gt; TextLintEngine &gt; TextLintCore(textlint)</span>
-<span class="hljs-comment">// See: https://github.com/textlint/textlint/blob/master/docs/use-as-modules.md</span>
-
-<span class="hljs-comment">// Command line interface</span>
-<span class="hljs-keyword">export</span> { cli } <span class="hljs-keyword">from</span> <span class="hljs-string">"./cli"</span>;
-
-<span class="hljs-comment">// It is a singleton object of TextLintCore</span>
-<span class="hljs-comment">// Recommend: use TextLintCore</span>
-<span class="hljs-keyword">export</span> { textlint } <span class="hljs-keyword">from</span> <span class="hljs-string">"./textlint"</span>;
-
-<span class="hljs-comment">// TextLintEngine is a wrapper around `textlint` for linting **multiple** files</span>
-<span class="hljs-comment">// include formatter, detecting utils</span>
-<span class="hljs-comment">// &lt;Recommend&gt;: It is easy to use</span>
-<span class="hljs-comment">// You can see engine/textlint-engine-core.js for more detail</span>
-<span class="hljs-keyword">export</span> { TextLintEngine } <span class="hljs-keyword">from</span> <span class="hljs-string">"./textlint-engine"</span>;
-
-<span class="hljs-comment">// TextFixEngine is a wrapper around `textlint` for linting **multiple** files</span>
-<span class="hljs-comment">// include formatter, detecting utils</span>
-<span class="hljs-comment">// &lt;Recommend&gt;: It is easy to use</span>
-<span class="hljs-comment">// You can see engine/textlint-engine-core.js for more detail</span>
-<span class="hljs-keyword">export</span> { TextFixEngine } <span class="hljs-keyword">from</span> <span class="hljs-string">"./textfix-engine"</span>;
-
-<span class="hljs-comment">// Core API for linting a **single** text or file.</span>
-<span class="hljs-keyword">export</span> { TextLintCore } <span class="hljs-keyword">from</span> <span class="hljs-string">"./textlint-core"</span>;
-</code></pre>
-<p>Recommend to use <code>TextLintEngine</code>.</p>
-<h2><a class="anchor" aria-hidden="true" id="architecture"></a><a href="#architecture" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Architecture</h2>
-<p>See <a href="https://github.com/textlint/textlint/blob/master/packages/textlint/src/README.md">https://github.com/textlint/textlint/blob/master/packages/textlint/src/README.md</a></p>
 <h3><a class="anchor" aria-hidden="true" id="clicommand-line-interface"></a><a href="#clicommand-line-interface" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CLI(Command Line Interface)</h3>
-<p>CLI parse command arguments, and run Engine with the options.</p>
-<h3><a class="anchor" aria-hidden="true" id="engine"></a><a href="#engine" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Engine</h3>
-<p>textlint has two engines <code>TextLintEngine</code> and <code>TextFixEngine</code>.</p>
-<p>Both engine</p>
-<ul>
-<li>Load configuration from <code>.textlintrc</code>.</li>
-<li>Handle <strong>multiple</strong> files or text string.</li>
-<li>Return an array of <code>TextLintResult</code> or <code>TextLintFixResult</code>
-<ul>
-<li>actually, return a Promise like <code>Promise&lt;TextLintResult[]&gt;</code></li>
-</ul></li>
-</ul>
-<h3><a class="anchor" aria-hidden="true" id="core"></a><a href="#core" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Core</h3>
-<p>textlint's core</p>
-<ul>
-<li>Accept configuration as object.</li>
-<li>Handle a <strong>single</strong> file or text string.</li>
-<li>Return <code>TextLintResult</code> or <code>TextLintFixResult</code>
-<ul>
-<li>actually, return a Promise like <code>Promise&lt;TextLintResult&gt;</code></li>
-</ul></li>
-</ul>
-<h2><a class="anchor" aria-hidden="true" id="example"></a><a href="#example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h2>
-<p>Lint files using <code>TextLintEngine</code>:</p>
-<p>See <a href="https://github.com/textlint/textlint/blob/master/examples/use-as-module/index.js">examples/use-as-module/index.js</a></p>
-<pre><code class="hljs css language-js"><span class="hljs-comment">// LICENSE : MIT</span>
-<span class="hljs-meta">"use strict"</span>;
-<span class="hljs-keyword">const</span> TextLintEngine = <span class="hljs-built_in">require</span>(<span class="hljs-string">"textlint"</span>).TextLintEngine;
-<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">"path"</span>);
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">lintFile</span>(<span class="hljs-params">filePath</span>) </span>{
-    <span class="hljs-keyword">const</span> options = {
-        <span class="hljs-comment">// load rules from [../rules]</span>
-        <span class="hljs-attr">rules</span>: [<span class="hljs-string">"no-todo"</span>],
-        <span class="hljs-attr">formatterName</span>: <span class="hljs-string">"pretty-error"</span>
-    };
-    <span class="hljs-keyword">const</span> engine = <span class="hljs-keyword">new</span> TextLintEngine(options);
-    <span class="hljs-keyword">const</span> filePathList = [path.resolve(process.cwd(), filePath)];
-    <span class="hljs-keyword">return</span> engine.executeOnFiles(filePathList).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">results</span>) </span>{
-        <span class="hljs-keyword">if</span> (engine.isErrorResults(results)) {
-            <span class="hljs-keyword">const</span> output = engine.formatResults(results);
-            <span class="hljs-built_in">console</span>.log(output);
-        } <span class="hljs-keyword">else</span> {
-            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"All Passed!"</span>);
-        }
-    });
-}
-
-lintFile(<span class="hljs-string">`<span class="hljs-subst">${__dirname}</span>/README.md`</span>).catch(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error</span>) </span>{
-    <span class="hljs-built_in">console</span>.error(error);
-    process.exit(<span class="hljs-number">1</span>);
-});
+<p>CLI parse command arguments, and run Engine with the options.
+It returns exit code.</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> { cli } <span class="hljs-keyword">from</span> <span class="hljs-string">"textlint"</span>;
+<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> cli.execute(<span class="hljs-string">`./README.md --rule textlint-rule-no-todo`</span>);
+assert.strictEqual(result, <span class="hljs-number">0</span>);
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" id="new-apis"></a><a href="#new-apis" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>New APIs</h2>
+<h2><a class="anchor" aria-hidden="true" id="apis"></a><a href="#apis" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>APIs</h2>
 <p>textlint v12.3.0 introduce new APIs.
 textlint will drop support old APIs(<code>textlint</code>, <code>TextLintEngine</code>, <code>TextFixEngine</code>, and <code>TextLintCore</code>) in the future.</p>
 <p>:memo: old APIs can not support ECMAScript modules, new APIs support ECMAScript modules.</p>
@@ -218,6 +142,57 @@ textlint will drop support old APIs(<code>textlint</code>, <code>TextLintEngine<
 <span class="hljs-keyword">const</span> availableExtensions = textlintrcDescriptor.availableExtensions;
 <span class="hljs-built_in">console</span>.log(availableExtensions); <span class="hljs-comment">// =&gt; [".md", ".txt"]</span>
 </code></pre>
+<h2><a class="anchor" aria-hidden="true" id="deprecated-apis"></a><a href="#deprecated-apis" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Deprecated APIs</h2>
+<h3><a class="anchor" aria-hidden="true" id="deprecated-engine"></a><a href="#deprecated-engine" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>[Deprecated] Engine</h3>
+<p>textlint has two engines <code>TextLintEngine</code> and <code>TextFixEngine</code>.</p>
+<p>Both engine</p>
+<ul>
+<li>Load configuration from <code>.textlintrc</code>.</li>
+<li>Handle <strong>multiple</strong> files or text string.</li>
+<li>Return an array of <code>TextLintResult</code> or <code>TextLintFixResult</code>
+<ul>
+<li>actually, return a Promise like <code>Promise&lt;TextLintResult[]&gt;</code></li>
+</ul></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="deprecated-core"></a><a href="#deprecated-core" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>[Deprecated] Core</h3>
+<p>textlint's core</p>
+<ul>
+<li>Accept configuration as object.</li>
+<li>Handle a <strong>single</strong> file or text string.</li>
+<li>Return <code>TextLintResult</code> or <code>TextLintFixResult</code>
+<ul>
+<li>actually, return a Promise like <code>Promise&lt;TextLintResult&gt;</code></li>
+</ul></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="example"></a><a href="#example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h3>
+<p>Lint files using <code>TextLintEngine</code>:</p>
+<p>See <a href="https://github.com/textlint/textlint/blob/master/examples/use-as-module/index.js">examples/use-as-module/index.js</a></p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">const</span> TextLintEngine = <span class="hljs-built_in">require</span>(<span class="hljs-string">"textlint"</span>).TextLintEngine;
+<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">"path"</span>);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">lintFile</span>(<span class="hljs-params">filePath</span>) </span>{
+    <span class="hljs-keyword">const</span> options = {
+        <span class="hljs-comment">// load rules from [../rules]</span>
+        <span class="hljs-attr">rules</span>: [<span class="hljs-string">"no-todo"</span>],
+        <span class="hljs-attr">formatterName</span>: <span class="hljs-string">"pretty-error"</span>
+    };
+    <span class="hljs-keyword">const</span> engine = <span class="hljs-keyword">new</span> TextLintEngine(options);
+    <span class="hljs-keyword">const</span> filePathList = [path.resolve(process.cwd(), filePath)];
+    <span class="hljs-keyword">return</span> engine.executeOnFiles(filePathList).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">results</span>) </span>{
+        <span class="hljs-keyword">if</span> (engine.isErrorResults(results)) {
+            <span class="hljs-keyword">const</span> output = engine.formatResults(results);
+            <span class="hljs-built_in">console</span>.log(output);
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"All Passed!"</span>);
+        }
+    });
+}
+
+lintFile(<span class="hljs-string">`<span class="hljs-subst">${__dirname}</span>/README.md`</span>).catch(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error</span>) </span>{
+    <span class="hljs-built_in">console</span>.error(error);
+    process.exit(<span class="hljs-number">1</span>);
+});
+</code></pre>
 <h2><a class="anchor" aria-hidden="true" id="testing"></a><a href="#testing" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Testing</h2>
 <p>You can use <a href="https://www.npmjs.com/package/textlint-tester">textlint-tester</a> for testing your custom rule.</p>
 <ul>
@@ -228,7 +203,7 @@ textlint will drop support old APIs(<code>textlint</code>, <code>TextLintEngine<
 <ul>
 <li><a href="https://github.com/azu/textlint-rule-spellcheck-tech-word/blob/master/test/test.js" title="spellcheck-tech-word-textlint-rule/test.js at master · azu/spellcheck-tech-word-textlint-rule">spellcheck-tech-word-textlint-rule/test.js at master · azu/spellcheck-tech-word-textlint-rule</a></li>
 </ul>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/formatter.html"><span class="arrow-prev">← </span><span>Formatter</span></a><a class="docs-next button" href="/docs/txtnode.html"><span class="function-name-prevnext">TxtAST Interface</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#overview">Overview</a></li><li><a href="#architecture">Architecture</a><ul class="toc-headings"><li><a href="#clicommand-line-interface">CLI(Command Line Interface)</a></li><li><a href="#engine">Engine</a></li><li><a href="#core">Core</a></li></ul></li><li><a href="#example">Example</a></li><li><a href="#new-apis">New APIs</a></li><li><a href="#testing">Testing</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/textlint-icon_256x256.png" alt="textlint" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/en/configuring.html">User Manual</a><a href="/docs/en/rule.html">Developer Guide</a></div><div><h5>Community</h5><a href="https://gitter.im/textlint-ja/textlint-ja">Project Chat</a></div><div><h5>More</h5><a href="/blog">Blog</a><a href="https://github.com/textlint/textlint">GitHub</a><a class="github-button" href="https://github.com/textlint/textlint" data-icon="octicon-star" data-count-href="/textlint/textlint/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2023 textlint organization</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/formatter.html"><span class="arrow-prev">← </span><span>Formatter</span></a><a class="docs-next button" href="/docs/txtnode.html"><span class="function-name-prevnext">TxtAST Interface</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#overview">Overview</a><ul class="toc-headings"><li><a href="#clicommand-line-interface">CLI(Command Line Interface)</a></li></ul></li><li><a href="#apis">APIs</a></li><li><a href="#deprecated-apis">Deprecated APIs</a><ul class="toc-headings"><li><a href="#deprecated-engine">[Deprecated] Engine</a></li><li><a href="#deprecated-core">[Deprecated] Core</a></li><li><a href="#example">Example</a></li></ul></li><li><a href="#testing">Testing</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/textlint-icon_256x256.png" alt="textlint" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/en/configuring.html">User Manual</a><a href="/docs/en/rule.html">Developer Guide</a></div><div><h5>Community</h5><a href="https://gitter.im/textlint-ja/textlint-ja">Project Chat</a></div><div><h5>More</h5><a href="/blog">Blog</a><a href="https://github.com/textlint/textlint">GitHub</a><a class="github-button" href="https://github.com/textlint/textlint" data-icon="octicon-star" data-count-href="/textlint/textlint/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2023 textlint organization</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;
