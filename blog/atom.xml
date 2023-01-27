@@ -2,12 +2,23 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://textlint.github.io/blog</id>
     <title>textlint Blog</title>
-    <updated>2021-05-24T06:00:00.000Z</updated>
+    <updated>2023-01-27T06:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://textlint.github.io/blog"/>
     <subtitle>The best place to stay up-to-date with the latest textlint news and events.</subtitle>
     <logo>https://textlint.github.io/img/textlint-icon_256x256.png</logo>
     <rights>Copyright © 2023textlint organization</rights>
+    <entry>
+        <title type="html"><![CDATA[textlint v13.0.0]]></title>
+        <id>https://textlint.github.io/blog/2023/01/27/textlint-13.html</id>
+        <link href="https://textlint.github.io/blog/2023/01/27/textlint-13.html"/>
+        <updated>2023-01-27T06:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>We just publish textlint v13.0.0, which is a major release upgrade of textlint.</p> <p>textlint v13 support ESM rules/plugins native.</p> <p>We have rewritten CLI and <code>textlint</code> package. However, it is not a breaking change for most <code>textlint</code> CLI users. Almost CLI be...</p>]]></summary>
+        <author>
+            <name>azu</name>
+            <uri>http://github.com/azu</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[textlint v12.0.0]]></title>
         <id>https://textlint.github.io/blog/2021/05/24/textlint-12.html</id>
