@@ -81,35 +81,35 @@
 <p>Please install following development prerequisites. You also need a <a href="https://github.com/">GitHub</a> account for contribution.</p>
 <ul>
 <li><a href="https://git-scm.com/">Git</a></li>
-<li><a href="https://nodejs.org/en/">Node.js</a> -- we tend to use latest stable Node.js although textlint supports &gt;= 6.0.0</li>
-<li><a href="https://classic.yarnpkg.com/en/">Yarn</a> -- textlint supports <a href="https://www.npmjs.com/get-npm">npm</a> &gt;= 2.0.0, but for development purpose, we chose Yarn as package manager</li>
+<li><a href="https://nodejs.org/en/">Node.js</a> -- We tend to use the latest stable Node.js</li>
 <li>Text editor</li>
 <li>Terminal emulator</li>
 </ul>
 <h3><a class="anchor" aria-hidden="true" id="cloning-copy-of-textlint"></a><a href="#cloning-copy-of-textlint" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cloning Copy of textlint</h3>
 <p>Forking a repository allows you to work with textlint codebase without special permission to the textlint repository itself.</p>
 <ol>
-<li><p>Navigate to <a href="https://github.com/textlint/textlint/">textlint</a> repository</p></li>
-<li><p>In the top–right corner of the page, click <strong>Fork</strong> button</p></li>
+<li><p>Click <a href="https://github.com/textlint/textlint/fork">Fork textlint</a></p></li>
+<li><p>Fork textlint repository to your account</p></li>
 <li><p>Create a clone of the fork locally in your terminal:</p>
-<pre><code class="hljs css language-sh">$ git <span class="hljs-built_in">clone</span> --recursive https://github.com/YOUR_ACCOUNT/textlint YOUR_FORKED_REPOSITORY
+<pre><code class="hljs css language-sh">$ git <span class="hljs-built_in">clone</span> --recursive https://github.com/YOUR_ACCOUNT/textlint
+$ <span class="hljs-built_in">cd</span> textlint/
 </code></pre></li>
 </ol>
 <p>See <a href="https://help.github.com/articles/fork-a-repo/">Fork A Repo: GitHub Help</a> for further detail.</p>
 <h3><a class="anchor" aria-hidden="true" id="building-textlint"></a><a href="#building-textlint" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Building textlint</h3>
 <p>After getting your clone, you can start playing with textlint.</p>
 <ol>
-<li><p>Change directory to your clone:</p>
-<pre><code class="hljs css language-sh">$ <span class="hljs-built_in">cd</span> YOUR_FORKED_REPOSITORY
+<li><p>Enable <a href="https://nodejs.org/api/corepack.html">Corepack</a> that help with managing versions of your package managers.</p>
+<pre><code class="hljs css language-sh">$ corepack <span class="hljs-built_in">enable</span> npm
 </code></pre></li>
 <li><p>Install dependencies and build packages:</p>
-<pre><code class="hljs css language-sh">$ yarn install
+<pre><code class="hljs css language-sh">$ npm install
 </code></pre></li>
 <li><p>Build textlint:</p>
-<pre><code class="hljs css language-sh">$ yarn run build
+<pre><code class="hljs css language-sh">$ npm run build
 </code></pre></li>
 <li><p>Building website if you needed:</p>
-<pre><code class="hljs css language-sh">$ yarn run website
+<pre><code class="hljs css language-sh">$ npm run website
 </code></pre></li>
 </ol>
 <p>Under the hood, textlint uses <a href="https://lerna.js.org/">Lerna</a> to manage multiple packages:</p>
@@ -122,7 +122,7 @@
 <li><code>website</code></li>
 </ul>
 <p>If you are new to Lerna, it seems to add another layer of complexity but it's simpler than you think; you can edit codes, run tests, commit changes, etc. as usual in most cases.</p>
-<p>Note that <code>yarn install</code> also builds a codebase, you can manually build by running <code>yarn run build</code>. We have separate task <code>yarn run website</code> since code and documentation have different life cycle.</p>
+<p>Note that <code>npm install</code> also builds a codebase, you can manually build by running <code>npm run build</code>. We have separate task <code>npm run website</code> since code and documentation have different life cycle.</p>
 <h3><a class="anchor" aria-hidden="true" id="creating-a-branch-for-your-work"></a><a href="#creating-a-branch-for-your-work" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creating a Branch for Your Work</h3>
 <p>Before adding changes to your clone, please create a new branch (typically called <em>feature branch</em>). Changes made to feature branch don't affect or corrupt <code>master</code> branch so you will feel safe. In Git, creating a branch is easy and fast:</p>
 <pre><code class="hljs css language-sh">$ git checkout -b your-new-feature
@@ -135,10 +135,10 @@
 <li><a href="https://www.typescriptlang.org/docs/handbook/project-references.html#what-is-a-project-reference">What is a Project Reference?</a></li>
 </ul>
 <p>You can update Project References from <code>package.json</code>'s dependencies.</p>
-<pre><code class="hljs">yarn <span class="hljs-keyword">run</span><span class="bash"> update:projectReferences</span>
+<pre><code class="hljs">npm <span class="hljs-keyword">run</span><span class="bash"> update:projectReferences</span>
 </code></pre>
 <p>Also, You can check Project References if it is correct.</p>
-<pre><code class="hljs">yarn <span class="hljs-keyword">run</span><span class="bash"> <span class="hljs-built_in">test</span>:projectReferences</span>
+<pre><code class="hljs">npm <span class="hljs-keyword">run</span><span class="bash"> <span class="hljs-built_in">test</span>:projectReferences</span>
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="coding-guideline"></a><a href="#coding-guideline" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Coding Guideline</h4>
 <h5><a class="anchor" aria-hidden="true" id="languages"></a><a href="#languages" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Languages</h5>
@@ -152,13 +152,13 @@
 <p>This repository uses <a href="https://eslint.org/">ESLint</a> for JavaScript linter and <a href="https://prettier.io/">Prettier</a> for code formatter. We use <a href="https://www.npmjs.com/package/lint-staged"><code>lint-staged</code></a> and <a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">Git Hooks</a> to make coding style consistent before commit, but if you have your own Git hooks locally, these setup doesn't work. In such case, please run ESLint and Prettier manually as below after making changes.</p>
 <ul>
 <li><p>Run ESLint:</p>
-<pre><code class="hljs css language-sh">$ yarn eslint
+<pre><code class="hljs css language-sh">$ npm run eslint
 </code></pre></li>
 <li><p>Run ESLint with <a href="https://eslint.org/docs/user-guide/command-line-interface#--fix"><code>--fix</code></a> feature to fix some wrong style automatically:</p>
-<pre><code class="hljs css language-sh">$ yarn eslint:fix
+<pre><code class="hljs css language-sh">$ npm run eslint:fix
 </code></pre></li>
 <li><p>Run Prettier to reformat code:</p>
-<pre><code class="hljs css language-sh">$ yarn format
+<pre><code class="hljs css language-sh">$ npm run format
 </code></pre></li>
 </ul>
 <h5><a class="anchor" aria-hidden="true" id="commit-message-format"></a><a href="#commit-message-format" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Commit Message Format</h5>
@@ -251,28 +251,28 @@ Closes #448.
 <p>All tests should be run at the top directory of your fork.</p>
 <h4><a class="anchor" aria-hidden="true" id="unit-test"></a><a href="#unit-test" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Unit Test</h4>
 <p>Run tests under <a href="https://github.com/textlint/textlint/tree/master/packages"><code>packages/</code></a>:</p>
-<pre><code class="hljs css language-sh">$ yarn <span class="hljs-built_in">test</span>
+<pre><code class="hljs css language-sh">$ npm run <span class="hljs-built_in">test</span>
 </code></pre>
 <p>While developing, it would be good to run package level unit test since it will run faster:</p>
 <pre><code class="hljs css language-sh">$ <span class="hljs-built_in">cd</span> packages/PACKAGE
-$ yarn <span class="hljs-built_in">test</span>
+$ npm run <span class="hljs-built_in">test</span>
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="example-test"></a><a href="#example-test" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example Test</h4>
 <p>Run <a href="https://github.com/textlint/textlint/tree/master/examples"><code>examples</code></a> as test:</p>
-<pre><code class="hljs css language-sh">$ yarn <span class="hljs-built_in">test</span>:examples
+<pre><code class="hljs css language-sh">$ npm run <span class="hljs-built_in">test</span>:examples
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="integration-test"></a><a href="#integration-test" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Integration Test</h4>
 <p>Run tests with <a href="https://github.com/textlint/textlint/tree/master/test/integration-test">real–world documents</a>:</p>
 <pre><code class="hljs css language-sh">$ git submodule update --init
-$ yarn <span class="hljs-built_in">test</span>:integration
+$ npm run <span class="hljs-built_in">test</span>:integration
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="documentation-test"></a><a href="#documentation-test" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Documentation Test</h4>
 <p>Run textlint to <a href="https://github.com/textlint/textlint/tree/master/docs"><code>docs/</code></a>, <a href="https://github.com/textlint/textlint/tree/master/.github"><code>.github/</code></a>, and <a href="https://github.com/textlint/textlint/blob/master/README.md">README</a> (we are dog–fooding!):</p>
-<pre><code class="hljs css language-sh">$ yarn <span class="hljs-built_in">test</span>:docs
+<pre><code class="hljs css language-sh">$ npm run <span class="hljs-built_in">test</span>:docs
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="all-tests"></a><a href="#all-tests" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>All Tests</h4>
-<p>Also you can run all of the above by:</p>
-<pre><code class="hljs css language-sh">$ yarn <span class="hljs-built_in">test</span>:all
+<p>Also, you can run all of the above by:</p>
+<pre><code class="hljs css language-sh">$ npm run <span class="hljs-built_in">test</span>:all
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="pushing-the-commit-and-opening-a-pull-request"></a><a href="#pushing-the-commit-and-opening-a-pull-request" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pushing the Commit and Opening a Pull Request</h3>
 <p>After finishing your changes and unit tests or documentation test ran fine, you can push your feature branch to GitHub. Please see <a href="https://help.github.com/articles/pushing-to-a-remote/">GitHub Help</a> for detail but typically, run <code>git push</code> at your terminal.</p>
