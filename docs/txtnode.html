@@ -71,7 +71,7 @@ Each node has common properties like <code>type</code>, <code>raw</code>, <code>
 <span class="hljs-keyword">interface</span> TxtNode {
     <span class="hljs-keyword">type</span>: <span class="hljs-built_in">string</span>;
     raw: <span class="hljs-built_in">string</span>;
-    range: TextNodeRange;
+    range: TxtNodeRange;
     loc: TxtNodeLineLocation;
     <span class="hljs-comment">// parent is runtime information</span>
     <span class="hljs-comment">// Not need in AST</span>
@@ -104,8 +104,7 @@ Each node has common properties like <code>type</code>, <code>raw</code>, <code>
 <span class="hljs-comment">/**
  * Range start with 0
  */</span>
-<span class="hljs-keyword">type</span> TextNodeRange = [<span class="hljs-built_in">number</span>, <span class="hljs-built_in">number</span>];
-
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> TxtNodeRange = readonly [startIndex: <span class="hljs-built_in">number</span>, endIndex: <span class="hljs-built_in">number</span>];
 </code></pre>
 <p><code>TxtNode</code> <strong>must</strong> have these properties.</p>
 <ul>
