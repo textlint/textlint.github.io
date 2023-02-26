@@ -95,7 +95,7 @@ textlint will drop support old APIs(<code>textlint</code>, <code>TextLintEngine<
 });
 <span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> linter.lintFiles([<span class="hljs-string">"*.md"</span>]);
 <span class="hljs-comment">// textlint has two types formatter sets for linter and fixer</span>
-<span class="hljs-keyword">const</span> formatter = <span class="hljs-keyword">await</span> loadLinterFormatter({ formatterName: <span class="hljs-string">"stylish"</span> })
+<span class="hljs-keyword">const</span> formatter = <span class="hljs-keyword">await</span> loadLinterFormatter({ formatterName: <span class="hljs-string">"stylish"</span> });
 <span class="hljs-keyword">const</span> output = formatter.format(results);
 <span class="hljs-built_in">console</span>.log(output);
 </code></pre>
