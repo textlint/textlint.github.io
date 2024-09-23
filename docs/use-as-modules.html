@@ -68,14 +68,15 @@ It returns exit code.</p>
 assert.strictEqual(result, <span class="hljs-number">0</span>);
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="apis"></a><a href="#apis" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>APIs</h2>
-<p>textlint v12.3.0 introduce new APIs.
-textlint will drop support old APIs(<code>textlint</code>, <code>TextLintEngine</code>, <code>TextFixEngine</code>, and <code>TextLintCore</code>) in the future.</p>
-<p>📝 old APIs can not support ECMAScript modules, new APIs support ECMAScript modules.</p>
+<p><strong>textlint v12.3.0</strong> introduced a new API, and textlint and will drop support for the old API (<code>textlint</code>, <code>TextLintEngine</code>, <code>TextFixEngine</code>, and <code>TextLintCore</code>) in the future. The old API does not support ECMAScript modules like the new API does. For guidance on migration, see the <a href="#migration-to-new-api">migration guide</a> section below.</p>
 <ul>
 <li><code>createLinter</code>: create linter instance
 <ul>
 <li><code>lintFiles(files): Promise&lt;TextlintResult[]&gt;</code>: lint files and return linter messages</li>
-<li><code>lintText(text, filePath): Promise&lt;TextlintResult&gt;</code> lint text with virtual filePath and return linter messages</li>
+<li><code>lintText(text, filePath): Promise&lt;TextlintResult&gt;</code> lint text with virtual filePath and return linter messages
+<ul>
+<li>The virtual file path does not need to be a real file, rather it should hint the content type being passed to lintText. For example, if <code>text</code> is Markdown, <code>filePath</code> could be <code>foo.md</code>.</li>
+</ul></li>
 <li><code>fixFiles(files): Promise&lt;TextlintFixResult[]&gt;</code> lint text and return fixer messages</li>
 <li><code>fixText(text, filePath): Promise&lt;TextlintFixResult&gt;</code> lint text with virtual filePath and return fixer messages
 <ul>
@@ -137,8 +138,12 @@ textlint will drop support old APIs(<code>textlint</code>, <code>TextLintEngine<
     <span class="hljs-comment">// if same ruleId or pluginId, customDescriptor is used.</span>
     descriptor: customDescriptor.concat(textlintrcDescriptor)
 });
+
+<span class="hljs-comment">// The second param should be a filename whose extension hints at the type</span>
+<span class="hljs-comment">// of content being passed to lintText(), e.g. README.md for Markdown.</span>
 <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> linter.lintText(<span class="hljs-string">"TODO: fix me"</span>, <span class="hljs-string">"README.md"</span>);
 <span class="hljs-built_in">console</span>.log(result);
+
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="get-lintable-file-extensions"></a><a href="#get-lintable-file-extensions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Get lintable file extensions</h2>
 <p><code>textlintrcDescriptor.availableExtensions</code> provide list of supported file extensions.</p>
@@ -182,7 +187,7 @@ textlint will drop support old APIs(<code>textlint</code>, <code>TextLintEngine<
 <li>actually, return a Promise like <code>Promise&lt;TextLintResult&gt;</code></li>
 </ul></li>
 </ul>
-<h3><a class="anchor" aria-hidden="true" id="example"></a><a href="#example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h3>
+<h3><a class="anchor" aria-hidden="true" id="textlintengine-example"></a><a href="#textlintengine-example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TextLintEngine Example</h3>
 <p>Lint files using <code>TextLintEngine</code>:</p>
 <p>See <a href="https://github.com/textlint/textlint/blob/master/examples/use-as-module/index.js">examples/use-as-module/index.js</a></p>
 <pre><code class="hljs css language-js"><span class="hljs-keyword">const</span> TextLintEngine = <span class="hljs-built_in">require</span>(<span class="hljs-string">"textlint"</span>).TextLintEngine;
@@ -211,6 +216,37 @@ lintFile(<span class="hljs-string">`<span class="hljs-subst">${__dirname}</span>
     process.exit(<span class="hljs-number">1</span>);
 });
 </code></pre>
+<h3><a class="anchor" aria-hidden="true" id="migration-to-new-api"></a><a href="#migration-to-new-api" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Migration to New API</h3>
+<p>To migrate to the new API from the old API, you may need to make additional changes beyond just changing to a different method.</p>
+<p>Old API:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">const</span> TextLintEngine = <span class="hljs-built_in">require</span>(<span class="hljs-string">"textlint"</span>).TextLintEngine;
+<span class="hljs-comment">// Rely on textlint finding the config automatically.</span>
+<span class="hljs-keyword">const</span> engine = <span class="hljs-keyword">new</span> TextLintEngine();
+</code></pre>
+<p>New API:</p>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// Import node helpers to get the config path.</span>
+<span class="hljs-keyword">import</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">"node:path"</span>;
+<span class="hljs-keyword">import</span> { cwd } <span class="hljs-keyword">from</span> <span class="hljs-string">"node:process"</span>;
+<span class="hljs-keyword">import</span> { createLinter, loadTextlintrc } <span class="hljs-keyword">from</span> <span class="hljs-string">"textlint"</span>;
+
+<span class="hljs-comment">// Load config using helpers to pass into createLinter().</span>
+<span class="hljs-keyword">const</span> descriptor = <span class="hljs-keyword">await</span> loadTextlintrc({
+    <span class="hljs-attr">configFilePath</span>: path.join(cwd(), <span class="hljs-string">".textlintrc.json"</span>)
+});
+<span class="hljs-keyword">const</span> linter = createLinter({
+    descriptor
+});
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="engineexecuteontext"></a><a href="#engineexecuteontext" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>engine.executeOnText</h4>
+<p>Replace with <code>linter.lintText()</code>:</p>
+<p>Old API:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">const</span> ruleText = <span class="hljs-string">"Tihs is my text."</span>;
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> engine.executeOnText(ruleText);
+</code></pre>
+<p>New API -- dummy filename to determine content type.</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">const</span> ruleText = <span class="hljs-string">"Tihs is my text."</span>;
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> linter.lintText(ruleText, <span class="hljs-string">'dummy.txt'</span>);
+</code></pre>
 <h2><a class="anchor" aria-hidden="true" id="testing"></a><a href="#testing" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Testing</h2>
 <p>You can use <a href="https://www.npmjs.com/package/textlint-tester">textlint-tester</a> for testing your custom rule.</p>
 <ul>
@@ -221,7 +257,7 @@ lintFile(<span class="hljs-string">`<span class="hljs-subst">${__dirname}</span>
 <ul>
 <li><a href="https://github.com/azu/textlint-rule-spellcheck-tech-word/blob/master/test/test.js" title="spellcheck-tech-word-textlint-rule/test.js at master · azu/spellcheck-tech-word-textlint-rule">spellcheck-tech-word-textlint-rule/test.js at master · azu/spellcheck-tech-word-textlint-rule</a></li>
 </ul>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/formatter.html"><span class="arrow-prev">← </span><span>Formatter</span></a><a class="docs-next button" href="/docs/txtnode.html"><span class="function-name-prevnext">TxtAST Interface</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#overview">Overview</a><ul class="toc-headings"><li><a href="#clicommand-line-interface">CLI(Command Line Interface)</a></li></ul></li><li><a href="#apis">APIs</a></li><li><a href="#examples">Examples</a><ul class="toc-headings"><li><a href="#lint-files-and-output-to-console">Lint files and output to console</a></li><li><a href="#fix-text-and-get-the-fixed-text">Fix text and get the fixed text</a></li></ul></li><li><a href="#add-custom-rules-and-plugins">Add custom rules and plugins</a></li><li><a href="#get-lintable-file-extensions">Get lintable file extensions</a></li><li><a href="#want-to-know-the-file-path-is-lintable-or-not">Want to know the file path is lintable or not</a></li><li><a href="#deprecated-apis">Deprecated APIs</a><ul class="toc-headings"><li><a href="#deprecated-engine">[Deprecated] Engine</a></li><li><a href="#deprecated-textlintcore">[Deprecated] <code>TextlintCore</code></a></li><li><a href="#example">Example</a></li></ul></li><li><a href="#testing">Testing</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/textlint-icon_256x256.png" alt="textlint" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/en/configuring.html">User Manual</a><a href="/docs/en/rule.html">Developer Guide</a></div><div><h5>Community</h5><a href="https://gitter.im/textlint-ja/textlint-ja">Project Chat</a></div><div><h5>More</h5><a href="/blog">Blog</a><a href="https://github.com/textlint/textlint">GitHub</a><a class="github-button" href="https://github.com/textlint/textlint" data-icon="octicon-star" data-count-href="/textlint/textlint/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2024 textlint organization</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/formatter.html"><span class="arrow-prev">← </span><span>Formatter</span></a><a class="docs-next button" href="/docs/txtnode.html"><span class="function-name-prevnext">TxtAST Interface</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#overview">Overview</a><ul class="toc-headings"><li><a href="#clicommand-line-interface">CLI(Command Line Interface)</a></li></ul></li><li><a href="#apis">APIs</a></li><li><a href="#examples">Examples</a><ul class="toc-headings"><li><a href="#lint-files-and-output-to-console">Lint files and output to console</a></li><li><a href="#fix-text-and-get-the-fixed-text">Fix text and get the fixed text</a></li></ul></li><li><a href="#add-custom-rules-and-plugins">Add custom rules and plugins</a></li><li><a href="#get-lintable-file-extensions">Get lintable file extensions</a></li><li><a href="#want-to-know-the-file-path-is-lintable-or-not">Want to know the file path is lintable or not</a></li><li><a href="#deprecated-apis">Deprecated APIs</a><ul class="toc-headings"><li><a href="#deprecated-engine">[Deprecated] Engine</a></li><li><a href="#deprecated-textlintcore">[Deprecated] <code>TextlintCore</code></a></li><li><a href="#textlintengine-example">TextLintEngine Example</a></li><li><a href="#migration-to-new-api">Migration to New API</a></li></ul></li><li><a href="#testing">Testing</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/textlint-icon_256x256.png" alt="textlint" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/en/configuring.html">User Manual</a><a href="/docs/en/rule.html">Developer Guide</a></div><div><h5>Community</h5><a href="https://gitter.im/textlint-ja/textlint-ja">Project Chat</a></div><div><h5>More</h5><a href="/blog">Blog</a><a href="https://github.com/textlint/textlint">GitHub</a><a class="github-button" href="https://github.com/textlint/textlint" data-icon="octicon-star" data-count-href="/textlint/textlint/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2024 textlint organization</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;
