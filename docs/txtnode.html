@@ -189,6 +189,8 @@ You can use this <code>ASTNodeTypes</code> value via following way:</p>
 <tr><td>ASTNodeTypes.HtmlBlockExit</td><td>TxtHtmlBlockNode(TxtParentNode)</td><td></td></tr>
 <tr><td>ASTNodeTypes.Link</td><td>TxtLinkNode(TxtParentNode)</td><td>Link Node</td></tr>
 <tr><td>ASTNodeTypes.LinkExit</td><td>TxtLinkNode(TxtParentNode)</td><td></td></tr>
+<tr><td>ASTNodeTypes.LinkReference</td><td>TxtLinkReferenceNode(TxtParentNode)</td><td>Link Reference Node(<code>[link][1]</code>)</td></tr>
+<tr><td>ASTNodeTypes.LinkReferenceExit</td><td>TxtLinkReferenceNode(TxtParentNode)</td><td></td></tr>
 <tr><td>ASTNodeTypes.Delete</td><td>TxtDeleteNode(TxtParentNode)</td><td>Delete Node(<code>~Str~</code>)</td></tr>
 <tr><td>ASTNodeTypes.DeleteExit</td><td>TxtDeleteNode(TxtParentNode)</td><td></td></tr>
 <tr><td>ASTNodeTypes.Emphasis</td><td>TxtEmphasisNode(TxtParentNode)</td><td>Emphasis(<code>*Str*</code>)</td></tr>
@@ -199,6 +201,10 @@ You can use this <code>ASTNodeTypes</code> value via following way:</p>
 <tr><td>ASTNodeTypes.BreakExit</td><td>TxtBreakNode</td><td></td></tr>
 <tr><td>ASTNodeTypes.Image</td><td>TxtImageNode</td><td>Image Node</td></tr>
 <tr><td>ASTNodeTypes.ImageExit</td><td>TxtImageNode</td><td></td></tr>
+<tr><td>ASTNodeTypes.ImageReference</td><td>TxtImageReferenceNode</td><td>Image Reference Node(<code>![alt][1]</code>)</td></tr>
+<tr><td>ASTNodeTypes.ImageReferenceExit</td><td>TxtImageReferenceNode</td><td></td></tr>
+<tr><td>ASTNodeTypes.Definition</td><td>TxtDefinitionNode</td><td>Definition Node(<code>[1]: https://example.com</code>)</td></tr>
+<tr><td>ASTNodeTypes.DefinitionExit</td><td>TxtDefinitionNode</td><td></td></tr>
 <tr><td>ASTNodeTypes.HorizontalRule</td><td>TxtHorizontalRuleNode</td><td>Horizontal Node(<code>---</code>)</td></tr>
 <tr><td>ASTNodeTypes.HorizontalRuleExit</td><td>TxtHorizontalRuleNode</td><td></td></tr>
 <tr><td>ASTNodeTypes.Comment</td><td>TxtCommentNode</td><td>Comment Node</td></tr>
@@ -209,11 +215,11 @@ You can use this <code>ASTNodeTypes</code> value via following way:</p>
 <tr><td>ASTNodeTypes.CodeExit</td><td>TxtCodeNode</td><td></td></tr>
 <tr><td>ASTNodeTypes.Html</td><td>TxtHtmlNode</td><td>Inline HTML Node</td></tr>
 <tr><td>ASTNodeTypes.HtmlExit</td><td>TxtHtmlNode</td><td></td></tr>
-<tr><td>ASTNodeTypes.Table</td><td>TxtTableNode</td><td>Table node. textlint 13+</td></tr>
+<tr><td>ASTNodeTypes.Table</td><td>TxtTableNode</td><td>Table Node. textlint 13+</td></tr>
 <tr><td>ASTNodeTypes.TableExit</td><td>TxtTableNode</td><td></td></tr>
-<tr><td>ASTNodeTypes.TableRow</td><td>TxtTableRowNode</td><td>Table row node. textlint 13+</td></tr>
+<tr><td>ASTNodeTypes.TableRow</td><td>TxtTableRowNode</td><td>Table row Node. textlint 13+</td></tr>
 <tr><td>ASTNodeTypes.TableRowExit</td><td>TxtTableRowNode</td><td></td></tr>
-<tr><td>ASTNodeTypes.TableCell</td><td>TxtTableCellNode</td><td>Table cell node. textlint 13+</td></tr>
+<tr><td>ASTNodeTypes.TableCell</td><td>TxtTableCellNode</td><td>Table cell Node. textlint 13+</td></tr>
 <tr><td>ASTNodeTypes.TableCellExit</td><td>TxtTableCellNode</td><td></td></tr>
 </tbody>
 </table>
