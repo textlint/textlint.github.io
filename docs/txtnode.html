@@ -223,6 +223,10 @@ You can use this <code>ASTNodeTypes</code> value via following way:</p>
 <tr><td>ASTNodeTypes.TableCellExit</td><td>TxtTableCellNode</td><td></td></tr>
 </tbody>
 </table>
+<blockquote>
+<p>📝Note
+<code>LinkReference</code>, <code>ImageReference</code> and <code>Definition</code> are introduced in textlint <a href="https://github.com/textlint/textlint/releases/tag/v14.5.0">v14.5.0</a>.</p>
+</blockquote>
 <p>Some node have additional properties.
 For example, <code>TxtHeaderNode</code> has <code>level</code> property.</p>
 <pre><code class="hljs css language-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> TxtHeaderNode <span class="hljs-keyword">extends</span> TxtParentNode {
