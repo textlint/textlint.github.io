@@ -60,8 +60,8 @@
 <p>textlint's plugin parse text to AST. AST is a tree structure that is consist of <code>Txt{{Type}}Node</code> like <code>TxtParagraphNode</code>.
 Each node has common properties like <code>type</code>, <code>raw</code>, <code>loc</code>, <code>range</code> and <code>parent</code> that is defined in <code>TxtNode</code> interface.</p>
 <p>Each node has own properties that is defined in each node type.</p>
-<p><a href="https://textlint.github.io/astexplorer/"><img src="/docs/assets/ast-explorer.png" alt="textlint ast-explorer"></a></p>
-<p><a href="https://textlint.github.io/astexplorer/" title="AST explorer for textlint">AST explorer for textlint</a> is useful for understanding AST.</p>
+<p><a href="https://textlint.org/astexplorer/"><img src="/docs/assets/ast-explorer.png" alt="textlint ast-explorer"></a></p>
+<p><a href="https://textlint.org/astexplorer/" title="AST explorer for textlint">AST explorer for textlint</a> is useful for understanding AST.</p>
 <h3><a class="anchor" aria-hidden="true" id="txtnode"></a><a href="#txtnode" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>TxtNode</code></h3>
 <p><code>TxtNode</code> is an abstract node.</p>
 <pre><code class="hljs css language-typescript"><span class="hljs-comment">/**
@@ -284,8 +284,8 @@ But, Following node <strong>should</strong> have some properties.</p>
 <p>That <code>TxtNode</code> interface is defined in <a href="https://github.com/textlint/textlint/tree/master/packages/@textlint/ast-node-types">packages/ast-node-types</a>.</p>
 <p>If you want to use this interface from TypeScript, <a href="https://github.com/textlint/textlint/tree/master/packages/@textlint/ast-node-types">packages/ast-node-types</a> is useful.</p>
 <h2><a class="anchor" aria-hidden="true" id="online-parsing-demo"></a><a href="#online-parsing-demo" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Online Parsing Demo</h2>
-<p><a href="https://textlint.github.io/astexplorer/"><img src="/docs/assets/ast-explorer.png" alt="ast-explorer fork"></a></p>
-<p><a href="https://textlint.github.io/astexplorer/" title="AST explorer for textlint">AST explorer for textlint</a> is useful for understanding AST.</p>
+<p><a href="https://textlint.org/astexplorer/"><img src="/docs/assets/ast-explorer.png" alt="ast-explorer fork"></a></p>
+<p><a href="https://textlint.org/astexplorer/" title="AST explorer for textlint">AST explorer for textlint</a> is useful for understanding AST.</p>
 <p>Minimum(recommended) rules is following code:</p>
 <pre><code class="hljs css language-js"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@param <span class="hljs-type">{RuleContext}</span> <span class="hljs-variable">context</span></span>
@@ -334,7 +334,7 @@ But, Following node <strong>should</strong> have some properties.</p>
 <p>In other word, textlint's rule handle <code>TxtNode</code>, but <a href="/docs/formatter.html" title="Formatter">formatter</a> handle <code>TextLintMessage</code>.</p>
 <h2><a class="anchor" aria-hidden="true" id="example"></a><a href="#example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h2>
 <p>Input: <code>*text*</code></p>
-<p>Output: The AST by <a href="https://textlint.github.io/astexplorer/" title="AST explorer for textlint">AST explorer for textlint</a> + Markdown</p>
+<p>Output: The AST by <a href="https://textlint.org/astexplorer/" title="AST explorer for textlint">AST explorer for textlint</a> + Markdown</p>
 <pre><code class="hljs css language-json">{
   <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Document"</span>,
   <span class="hljs-attr">"children"</span>: [
