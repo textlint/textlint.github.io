@@ -35,6 +35,15 @@ This significantly reduces the codebase size and maintenance burden while provid
 <h2 class="anchor anchorWithStickyNavbar_Hkaj" id="breaking-changes">Breaking Changes<a href="https://textlint.org/blog/2025/06/22/textlint-15#breaking-changes" class="hash-link" aria-label="Direct link to Breaking Changes" title="Direct link to Breaking Changes">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_Hkaj" id="nodejs-20-required">Node.js 20+ Required<a href="https://textlint.org/blog/2025/06/22/textlint-15#nodejs-20-required" class="hash-link" aria-label="Direct link to Node.js 20+ Required" title="Direct link to Node.js 20+ Required">​</a></h3>
 <p>textlint v15 requires Node.js 20.0.0 or later. This change aligns with Node.js LTS support and enables the use of modern JavaScript features.</p>
+<h3 class="anchor anchorWithStickyNavbar_Hkaj" id="removed-module-field-for-webpack-compatibility">Removed <code>module</code> Field for Webpack Compatibility<a href="https://textlint.org/blog/2025/06/22/textlint-15#removed-module-field-for-webpack-compatibility" class="hash-link" aria-label="Direct link to removed-module-field-for-webpack-compatibility" title="Direct link to removed-module-field-for-webpack-compatibility">​</a></h3>
+<p>In textlint v15, the <code>module</code> field has been removed from all @textlint packages that had both <code>type: "commonjs"</code> and a <code>module</code> field, to improve compatibility with Webpack. Previously, having both fields caused resolution issues in Webpack, requiring users to add workarounds.</p>
+<p><strong>Details:</strong></p>
+<ul>
+<li>Removed the <code>module</code> field from 15 @textlint packages</li>
+<li>No longer necessary to set custom <code>mainFields</code> in Webpack</li>
+<li><a href="https://github.com/textlint/textlint/issues/1587" target="_blank" rel="noopener noreferrer">Issue #1587</a> / <a href="https://github.com/textlint/textlint/pull/1588" target="_blank" rel="noopener noreferrer">PR #1588</a></li>
+</ul>
+<p>With this change, Webpack users can use textlint packages out-of-the-box, and module resolution issues are resolved without extra configuration.</p>
 <p><strong>Migration Required:</strong></p>
 <ul>
 <li>Update your Node.js version to 20.0.0 or later</li>
