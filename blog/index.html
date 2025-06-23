@@ -12,8 +12,8 @@
 <link rel="search" type="application/opensearchdescription+xml" title="textlint" href="/opensearch.xml">
 
 <script src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/assets/css/styles.8234e5f7.css">
-<script src="/assets/js/runtime~main.99ef7472.js" defer="defer"></script>
-<script src="/assets/js/main.f47a37c6.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.6ff7dd5e.js" defer="defer"></script>
+<script src="/assets/js/main.a70d3d93.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;"><defs>
@@ -40,6 +40,13 @@ This significantly reduces the codebase size and maintenance burden while provid
 <h2 class="anchor anchorWithStickyNavbar_Hkaj" id="breaking-changes">Breaking Changes<a href="#breaking-changes" class="hash-link" aria-label="Direct link to Breaking Changes" title="Direct link to Breaking Changes">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_Hkaj" id="nodejs-20-required">Node.js 20+ Required<a href="#nodejs-20-required" class="hash-link" aria-label="Direct link to Node.js 20+ Required" title="Direct link to Node.js 20+ Required">​</a></h3>
 <p>textlint v15 requires Node.js 20.0.0 or later. This change aligns with Node.js LTS support and enables the use of modern JavaScript features.</p>
+<p><strong>Migration Required:</strong></p>
+<ul>
+<li>Update your Node.js version to 20.0.0 or later</li>
+<li>Update your CI/CD environments to use Node.js 20+</li>
+<li>Update any Docker images or deployment configurations</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_Hkaj" id="removed-deprecated-ap">Removed Deprecated AP<a href="#removed-deprecated-ap" class="hash-link" aria-label="Direct link to Removed Deprecated AP" title="Direct link to Removed Deprecated AP">​</a></h3>
 <h3 class="anchor anchorWithStickyNavbar_Hkaj" id="removed-module-field-for-webpack-compatibility">Removed <code>module</code> Field for Webpack Compatibility<a href="#removed-module-field-for-webpack-compatibility" class="hash-link" aria-label="Direct link to removed-module-field-for-webpack-compatibility" title="Direct link to removed-module-field-for-webpack-compatibility">​</a></h3>
 <p>In textlint v15, the <code>module</code> field has been removed from all @textlint packages that had both <code>type: &quot;commonjs&quot;</code> and a <code>module</code> field, to improve compatibility with Webpack. Previously, having both fields caused resolution issues in Webpack, requiring users to add workarounds.</p>
 <p><strong>Details:</strong></p>
@@ -48,14 +55,7 @@ This significantly reduces the codebase size and maintenance burden while provid
 <li>No longer necessary to set custom <code>mainFields</code> in Webpack</li>
 <li><a href="https://github.com/textlint/textlint/issues/1587" target="_blank" rel="noopener noreferrer">Issue #1587</a> / <a href="https://github.com/textlint/textlint/pull/1588" target="_blank" rel="noopener noreferrer">PR #1588</a></li>
 </ul>
-<p>With this change, Webpack users can use textlint packages out-of-the-box, and module resolution issues are resolved without extra configuration.</p>
-<p><strong>Migration Required:</strong></p>
-<ul>
-<li>Update your Node.js version to 20.0.0 or later</li>
-<li>Update your CI/CD environments to use Node.js 20+</li>
-<li>Update any Docker images or deployment configurations</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_Hkaj" id="removed-deprecated-apis">Removed Deprecated APIs<a href="#removed-deprecated-apis" class="hash-link" aria-label="Direct link to Removed Deprecated APIs" title="Direct link to Removed Deprecated APIs">​</a></h3>
+<p>With this change, Webpack users can use textlint packages out-of-the-box, and module resolution issues are resolved without extra configuration.Is</p>
 <p>The following deprecated APIs have been completely removed from the <code>textlint</code> package:</p>
 <h4 class="anchor anchorWithStickyNavbar_Hkaj" id="textlintengine--createlinter"><code>TextLintEngine</code> → <code>createLinter()</code><a href="#textlintengine--createlinter" class="hash-link" aria-label="Direct link to textlintengine--createlinter" title="Direct link to textlintengine--createlinter">​</a></h4>
 <p><strong>Before (v14 and earlier):</strong></p>
