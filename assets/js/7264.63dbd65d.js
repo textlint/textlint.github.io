@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunktextlint_website=globalThis.webpackChunktextlint_website||[]).push([[7264],{7264:(t,e,i)=>{i.r(e)}}]);
